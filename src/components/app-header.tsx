@@ -36,7 +36,7 @@ export default function AppHeader() {
               </div>
               <div>
                 <h1 className="text-xl font-bold text-primary font-headline">MedQ</h1>
-                <p className="text-xs text-muted-foreground">From symptoms to treatment — without the chaos.</p>
+                <p className="text-xs text-muted-foreground">from symptoms to treatment — without the chaos.</p>
               </div>
             </Link>
            ) : (
