@@ -2,16 +2,30 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Stethoscope, UserPlus, BedDouble, FileText } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { placeholderImages } from '@/lib/placeholder-images';
 
 export default function Home() {
+  const illustration = placeholderImages.find(p => p.id === 'home-doctor-assist');
+
   return (
     <div className="flex flex-col space-y-8">
-      <header className="text-center">
+      <header className="text-center space-y-4">
+        {illustration && (
+           <Image
+            src={illustration.imageUrl}
+            alt={illustration.description}
+            width={600}
+            height={400}
+            data-ai-hint={illustration.imageHint}
+            className="w-48 h-32 mx-auto object-cover rounded-lg"
+          />
+        )}
         <h1 className="text-4xl font-bold tracking-tight text-primary font-headline">
-          MediW
+          MediFlow
         </h1>
-        <p className="text-muted-foreground">
-          From symptoms to treatment — without the chaos.
+        <p className="text-muted-foreground max-w-md mx-auto">
+          Helping you find the right care, faster. We’ll guide you through every step.
         </p>
       </header>
 
@@ -40,7 +54,7 @@ export default function Home() {
 
       <Card className="shadow-lg">
         <CardHeader>
-          <CardTitle className="text-lg">Current Queue Status</CardTitle>
+          <CardTitle className="text-lg">Your Visit Status</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center justify-between">
@@ -67,7 +81,7 @@ function ActionButton({ href, icon: Icon, label }: { href: string; icon: React.E
     <Link href={href} passHref>
       <Button
         variant="outline"
-        className="h-28 w-full flex-col justify-center space-y-2 rounded-lg border-2 text-center shadow-sm hover:border-primary hover:bg-primary/5"
+        className="h-32 w-full flex-col justify-center space-y-2 rounded-lg border-2 p-4 text-center shadow-sm hover:border-primary hover:bg-primary/5"
       >
         <Icon className="h-8 w-8 text-primary" />
         <span className="whitespace-normal text-sm font-semibold">{label}</span>

@@ -1,5 +1,8 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { User, Activity, FileText } from 'lucide-react';
+import Image from 'next/image';
+import { placeholderImages } from '@/lib/placeholder-images';
+
 
 type Visit = {
     date: string;
@@ -30,9 +33,20 @@ const visitHistory: Visit[] = [
 ];
 
 export default function VisitHistoryPage() {
+    const illustration = placeholderImages.find(p => p.id === 'patient-reviewing-records');
     return (
         <div className="flex flex-col space-y-6">
-            <header className="text-center">
+            <header className="text-center space-y-4">
+                {illustration && (
+                    <Image
+                        src={illustration.imageUrl}
+                        alt={illustration.description}
+                        width={600}
+                        height={400}
+                        data-ai-hint={illustration.imageHint}
+                        className="w-48 h-32 mx-auto object-cover rounded-lg"
+                    />
+                )}
                 <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
                     My Medical Visits
                 </h1>

@@ -12,8 +12,6 @@ export default async function SymptomCheckerPage() {
     data: AISymptomTriageInput
   ): Promise<AISymptomTriageOutput> {
     'use server';
-    // Add a delay to simulate network latency for a better UX
-    await new Promise((resolve) => setTimeout(resolve, 1500));
     return await aiSymptomTriage(data);
   }
 

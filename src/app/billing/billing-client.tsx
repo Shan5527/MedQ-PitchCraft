@@ -18,12 +18,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import {
-  ArrowUp,
   Loader2,
   Plus,
   Trash2,
   Sparkles,
   AlertCircle,
+  TrendingUp,
 } from 'lucide-react';
 import type {
   TransparentBillingExplainerInput,
@@ -31,6 +31,8 @@ import type {
 } from '@/ai/flows/transparent-billing-explainer-flow';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import Image from 'next/image';
+import { placeholderImages } from '@/lib/placeholder-images';
 
 type BillItem = { name: string; amount: number };
 
@@ -53,6 +55,7 @@ export default function BillingClient({
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<TransparentBillingExplainerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const illustration = placeholderImages.find(p => p.id === 'doctor-explaining-bill');
 
   const handleAddItem = () => {
     if (newItemName && newItemAmount) {
@@ -81,7 +84,7 @@ export default function BillingClient({
         const response = await getBillExplanationAction({ billItems });
         setResult(response);
     } catch (err: any) {
-        setError(err.message || 'Failed to get explanation. Please try again.');
+        setError( 'The AI model could not provide an explanation. Please try again.');
     } finally {
         setIsLoading(false);
     }
@@ -100,7 +103,17 @@ export default function BillingClient({
   if (result) {
     return (
         <div className="space-y-6">
-            <header className="text-center">
+            <header className="text-center space-y-4">
+                 {illustration && (
+                    <Image
+                        src={illustration.imageUrl}
+                        alt={illustration.description}
+                        width={600}
+                        height={400}
+                        data-ai-hint={illustration.imageHint}
+                        className="w-48 h-32 mx-auto object-cover rounded-lg"
+                    />
+                )}
                 <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
                     Your Explained Bill
                 </h1>
@@ -122,7 +135,7 @@ export default function BillingClient({
                                     <p className="text-muted-foreground">{item.averageMarketCostRange}</p>
                                     {item.isHigherThanAverage && (
                                         <Badge variant="warning" className="mt-2 gap-1">
-                                            <ArrowUp className="h-3 w-3" />
+                                            <TrendingUp className="h-3 w-3" />
                                             Higher than average
                                         </Badge>
                                     )}
@@ -139,9 +152,19 @@ export default function BillingClient({
 
   return (
     <div className="space-y-6">
-      <header className="text-center">
+      <header className="text-center space-y-4">
+        {illustration && (
+            <Image
+                src={illustration.imageUrl}
+                alt={illustration.description}
+                width={600}
+                height={400}
+                data-ai-hint={illustration.imageHint}
+                className="w-48 h-32 mx-auto object-cover rounded-lg"
+            />
+        )}
         <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
-          Understand Your Bill
+          Understand Your Hospital Bill
         </h1>
         <p className="text-muted-foreground">
           Let AI explain your hospital charges.
@@ -158,7 +181,7 @@ export default function BillingClient({
             {billItems.map((item, index) => (
                 <div key={index} className="flex items-center gap-2 rounded-md border p-2">
                     <div className="flex-1 font-medium">{item.name}</div>
-                    <div className="font-semibold">₹{item.amount}</div>
+                    <div className="font-semibold">₹{item.amount.toLocaleString()}</div>
                     <Button variant="ghost" size="icon" className="h-8 w-8 text-muted-foreground" onClick={() => handleRemoveItem(index)}>
                         <Trash2 className="h-4 w-4"/>
                     </Button>
@@ -174,11 +197,11 @@ export default function BillingClient({
               <Label htmlFor="item-name">Item Name</Label>
               <Input id="item-name" value={newItemName} onChange={(e) => setNewItemName(e.target.value)} placeholder="e.g. Consultation Fee" />
             </div>
-            <div className="w-28 space-y-1">
+            <div className="w-32 space-y-1">
               <Label htmlFor="item-amount">Amount (₹)</Label>
               <Input id="item-amount" type="number" value={newItemAmount} onChange={(e) => setNewItemAmount(e.target.value)} placeholder="e.g. 1500" />
             </div>
-            <Button variant="outline" size="icon" onClick={handleAddItem} className="h-10 w-10">
+            <Button variant="outline" size="icon" onClick={handleAddItem} className="h-10 w-10 flex-shrink-0">
               <Plus className="h-5 w-5" />
             </Button>
           </div>
