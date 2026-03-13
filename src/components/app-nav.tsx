@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils';
 const navItems = [
   { href: '/queue/token', icon: Users, label: 'Queue' },
   { href: '/', icon: Home, label: 'Home' },
-  { href: '/history', icon: User, label: 'Profile' },
+  { href: '/profile', icon: User, label: 'Profile' },
 ];
 
 export default function AppNav() {

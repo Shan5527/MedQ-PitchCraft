@@ -26,10 +26,10 @@ export default function Home() {
       description: 'Explain your medical bill'
     },
      {
-      label: 'My Visits',
-      href: '/history',
+      label: 'My Health',
+      href: '/profile',
       icon: User,
-      description: 'View your medical history'
+      description: 'View your health dashboard'
     },
   ];
   

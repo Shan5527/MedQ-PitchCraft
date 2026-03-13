@@ -14,7 +14,7 @@ export default function AppHeader() {
     if (pathname.startsWith('/queue')) return 'Queue Status';
     if (pathname.startsWith('/beds')) return 'Bed Availability';
     if (pathname.startsWith('/billing')) return 'Understand Your Bill';
-    if (pathname.startsWith('/history')) return 'My Profile';
+    if (pathname.startsWith('/profile')) return 'My Health Profile';
     return 'MedQ';
   };
   
@@ -46,7 +46,7 @@ export default function AppHeader() {
              </h1>
            )}
         </div>
-        <Link href="/history">
+        <Link href="/profile">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background">
             <User className="h-6 w-6 text-primary" />
           </div>
