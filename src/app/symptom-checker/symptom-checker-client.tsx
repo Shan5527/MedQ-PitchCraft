@@ -16,7 +16,6 @@ import {
   Bone,
   Smile,
   Venus,
-  ClipboardList,
   Layers,
   Bandage,
   ChevronRight,
@@ -54,6 +53,27 @@ type Step =
   | 'emergency';
 
 const TOTAL_FORM_STEPS = 6;
+
+const DigestiveIcon = (props: React.ComponentProps<'svg'>) => (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      {...props}
+    >
+      <path d="M5.5 12.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5c0 1.9-1.2 3.5-2.9 4.2"></path>
+      <path d="M14.5 16.5c2.5 0 4.5-2 4.5-4.5s-2-4.5-4.5-4.5"></path>
+      <path d="M5.5 12.5H2.5"></path>
+      <path d="M10 8V6"></path>
+      <path d="M14.5 8V5.5"></path>
+    </svg>
+);
 
 // Main component
 export default function SymptomCheckerClient({
@@ -425,7 +445,7 @@ const symptomCategories = [
   { name: 'General Symptoms', icon: Thermometer, concern: 'Fever' },
   { name: 'Respiratory', icon: Activity, concern: 'Breathing problem' },
   { name: 'Cardiac', icon: Heart, concern: 'Chest pain' },
-  { name: 'Digestive', icon: ClipboardList, concern: 'Stomach pain' },
+  { name: 'Digestive', icon: DigestiveIcon, concern: 'Stomach pain' },
   { name: 'Neurological', icon: Brain, concern: 'Headache' },
   { name: 'Skin', icon: Layers, concern: 'Skin problem' },
   { name: 'Orthopedic', icon: Bone, concern: 'Joint or muscle pain' },
