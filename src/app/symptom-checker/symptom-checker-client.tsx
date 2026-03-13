@@ -26,6 +26,7 @@ import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
+import { Textarea } from '@/components/ui/textarea';
 
 type Symptom =
   | 'Fever'
@@ -55,6 +56,7 @@ export default function SymptomCheckerClient({
   ) => Promise<AISymptomTriageOutput>;
 }) {
   const [selectedSymptoms, setSelectedSymptoms] = useState<Symptom[]>([]);
+  const [symptomDescription, setSymptomDescription] = useState('');
   const [duration, setDuration] = useState<Duration>('Today');
   const [severity, setSeverity] = useState<Severity>('Moderate');
   const [result, setResult] = useState<AISymptomTriageOutput | null>(null);
@@ -71,8 +73,8 @@ export default function SymptomCheckerClient({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (selectedSymptoms.length === 0) {
-      setError('Please select at least one symptom.');
+    if (selectedSymptoms.length === 0 && !symptomDescription) {
+      setError('Please select at least one symptom or describe how you are feeling.');
       return;
     }
     setError(null);
@@ -82,11 +84,12 @@ export default function SymptomCheckerClient({
     try {
       const response = await analyzeSymptomsAction({
         symptoms: selectedSymptoms,
+        symptomsDescription,
         duration,
         severity,
       });
       setResult(response);
-    } catch (err) {
+    } catch (err) => {
       setError('Failed to analyze symptoms. Please try again.');
     } finally {
       setIsLoading(false);
@@ -95,6 +98,7 @@ export default function SymptomCheckerClient({
 
   const handleReset = () => {
     setSelectedSymptoms([]);
+    setSymptomDescription('');
     setDuration('Today');
     setSeverity('Moderate');
     setResult(null);
@@ -184,8 +188,9 @@ export default function SymptomCheckerClient({
       </header>
       <form onSubmit={handleSubmit} className="space-y-8">
         <div className="space-y-4">
-          <Label className="text-lg font-semibold">What are your symptoms?</Label>
-          <div className="grid grid-cols-2 gap-3">
+          <Label className="text-lg font-semibold">What are your main symptoms?</Label>
+           <p className="text-sm text-muted-foreground">Select any that apply. This helps our AI get started.</p>
+          <div className="grid grid-cols-3 gap-3">
             {allSymptoms.map(({ name, icon: Icon }) => (
               <Button
                 key={name}
@@ -199,6 +204,16 @@ export default function SymptomCheckerClient({
               </Button>
             ))}
           </div>
+        </div>
+        
+        <div className="space-y-4">
+          <Label className="text-lg font-semibold">Can you describe your symptoms in more detail?</Label>
+          <Textarea
+            placeholder="e.g., 'I have a sharp pain in my upper abdomen that gets worse after eating...'"
+            value={symptomDescription}
+            onChange={(e) => setSymptomDescription(e.target.value)}
+            rows={4}
+          />
         </div>
 
         <div className="space-y-4">
