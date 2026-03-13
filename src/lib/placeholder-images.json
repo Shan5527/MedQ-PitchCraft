@@ -27,26 +27,26 @@
     {
       "id": "expert-avatar-1",
       "description": "Avatar for Dr. Priya Sharma",
-      "imageUrl": "https://picsum.photos/seed/expert1/100/100",
-      "imageHint": "doctor avatar"
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     },
     {
       "id": "expert-avatar-2",
       "description": "Avatar for Nurse Raj Singh",
-      "imageUrl": "https://picsum.photos/seed/expert2/100/100",
-      "imageHint": "nurse avatar"
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     },
     {
       "id": "expert-avatar-3",
       "description": "Avatar for Dr. Anjali Mehta",
-      "imageUrl": "https://picsum.photos/seed/expert3/100/100",
-      "imageHint": "doctor woman avatar"
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     },
     {
       "id": "expert-avatar-4",
       "description": "Avatar for Dr. Vikram Rao",
-      "imageUrl": "https://picsum.photos/seed/expert4/100/100",
-      "imageHint": "doctor male avatar"
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     }
   ]
 }
