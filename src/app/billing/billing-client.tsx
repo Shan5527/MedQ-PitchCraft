@@ -156,7 +156,7 @@ export default function BillingClient({
           Understand Your Hospital Bill
         </h1>
         <p className="text-muted-foreground">
-          Let AI explain your hospital charges. No more manual entry.
+          Get simple explanations for complex charges. Just scan your bill to start.
         </p>
       </header>
       
