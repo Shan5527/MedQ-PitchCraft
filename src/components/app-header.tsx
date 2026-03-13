@@ -35,7 +35,7 @@ export default function AppHeader() {
                 />
               </div>
               <div>
-                <h1 className="text-3xl font-bold font-headline">
+                <h1 className="text-4xl font-bold font-headline">
                   Med<span className="text-destructive">Q</span>
                 </h1>
               </div>
