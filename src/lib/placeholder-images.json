@@ -23,6 +23,30 @@
       "description": "A placeholder avatar for a user profile.",
       "imageUrl": "https://picsum.photos/seed/useravatar/100/100",
       "imageHint": "person avatar"
+    },
+    {
+      "id": "expert-avatar-1",
+      "description": "Avatar for Dr. Priya Sharma",
+      "imageUrl": "https://picsum.photos/seed/expert1/100/100",
+      "imageHint": "doctor avatar"
+    },
+    {
+      "id": "expert-avatar-2",
+      "description": "Avatar for Nurse Raj Singh",
+      "imageUrl": "https://picsum.photos/seed/expert2/100/100",
+      "imageHint": "nurse avatar"
+    },
+    {
+      "id": "expert-avatar-3",
+      "description": "Avatar for Dr. Anjali Mehta",
+      "imageUrl": "https://picsum.photos/seed/expert3/100/100",
+      "imageHint": "doctor woman avatar"
+    },
+    {
+      "id": "expert-avatar-4",
+      "description": "Avatar for Dr. Vikram Rao",
+      "imageUrl": "https://picsum.photos/seed/expert4/100/100",
+      "imageHint": "doctor male avatar"
     }
   ]
 }

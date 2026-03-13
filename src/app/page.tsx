@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Stethoscope, BedDouble, FileText, User } from 'lucide-react';
+import { Stethoscope, BedDouble, FileText, Users } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { placeholderImages } from '@/lib/placeholder-images';
@@ -26,10 +26,10 @@ export default function Home() {
       description: 'Explain your medical bill'
     },
      {
-      label: 'My Health',
-      href: '/profile',
-      icon: User,
-      description: 'View your health dashboard'
+      label: 'Talk to an Expert',
+      href: '/experts',
+      icon: Users,
+      description: 'Connect with doctors & nurses'
     },
   ];
   
