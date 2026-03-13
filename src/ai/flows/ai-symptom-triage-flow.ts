@@ -16,7 +16,6 @@ const AISymptomTriageInputSchema = z.object({
     .describe('A list of symptoms reported by the patient.'),
   symptomsDescription: z
     .string()
-    .optional()
     .describe("A free-text description of the patient's symptoms."),
   duration: z
     .enum(['Today', '1–3 days', 'More than 3 days'])
