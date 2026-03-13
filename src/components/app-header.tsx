@@ -10,7 +10,6 @@ export default function AppHeader() {
   const logo = placeholderImages.find(p => p.id === 'logo');
 
   const getTitle = () => {
-    if (pathname === '/') return 'Hello, Guest';
     if (pathname.startsWith('/symptom-checker')) return 'Symptom Check';
     if (pathname.startsWith('/queue')) return 'Queue Status';
     if (pathname.startsWith('/beds')) return 'Bed Availability';
@@ -20,19 +19,25 @@ export default function AppHeader() {
   };
   
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-background/80 backdrop-blur-sm">
-      <div className="mx-auto flex h-16 max-w-lg items-center justify-between px-4">
+    <header className="sticky top-0 z-40 w-full border-b bg-secondary">
+      <div className="mx-auto flex h-20 max-w-lg items-center justify-between px-4">
         <div>
            {pathname === '/' && logo ? (
-            <Link href="/">
-              <Image
-                src={logo.imageUrl}
-                alt="MedQ Logo"
-                width={80}
-                height={28}
-                priority
-                data-ai-hint={logo.imageHint}
-              />
+            <Link href="/" className="flex items-center gap-3">
+              <div className="relative h-12 w-12">
+                <Image
+                    src={logo.imageUrl}
+                    alt="MedQ Logo"
+                    fill
+                    className="object-contain"
+                    priority
+                    data-ai-hint={logo.imageHint}
+                />
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-primary font-headline">MedQ</h1>
+                <p className="text-xs text-muted-foreground">From symptoms to treatment — without the chaos.</p>
+              </div>
             </Link>
            ) : (
              <h1 className="text-xl font-bold text-primary font-headline">
@@ -41,7 +46,7 @@ export default function AppHeader() {
            )}
         </div>
         <Link href="/history">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-secondary">
+          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-background">
             <User className="h-6 w-6 text-primary" />
           </div>
         </Link>
