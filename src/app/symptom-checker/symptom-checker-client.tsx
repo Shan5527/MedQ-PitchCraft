@@ -15,7 +15,7 @@ import {
   Brain,
   Bone,
   Smile,
-  Baby,
+  Venus,
   ClipboardList,
   Layers,
   Bandage,
@@ -429,7 +429,7 @@ const symptomCategories = [
   { name: 'Neurological', icon: Brain, concern: 'Headache' },
   { name: 'Skin', icon: Layers, concern: 'Skin problem' },
   { name: 'Orthopedic', icon: Bone, concern: 'Joint or muscle pain' },
-  { name: 'Women’s Health', icon: Baby, concern: 'Pregnancy concerns' },
+  { name: 'Women’s Health', icon: Venus, concern: 'Pregnancy concerns' },
   { name: 'Mental Health', icon: Smile, concern: 'Mental health concern' },
   { name: 'Injury', icon: Bandage, concern: 'Injury' },
 ];
@@ -838,7 +838,7 @@ const ResultScreen = ({
             <AlertDescription>
               Your case is being fast-tracked. You will be placed in a
               fast-track queue.
-            </AlertDescription>
+            </Alex>
           </div>
         </Alert>
       )}
