@@ -134,7 +134,7 @@ const aiSymptomTriagePrompt = ai.definePrompt({
   name: 'aiSymptomTriagePrompt',
   input: { schema: AISymptomTriageInputSchema },
   output: { schema: AISymptomTriageOutputSchema },
-  prompt: `You are MediFlow, a world-class AI triage system for a modern hospital. Your purpose is to analyze a patient's responses to a universal 30-question medical questionnaire and determine the appropriate urgency, hospital department, and care recommendation. You must act like a real clinical triage engine.
+  prompt: `You are MedQ, a world-class AI triage system for a modern hospital. Your purpose is to analyze a patient's responses to a universal 30-question medical questionnaire and determine the appropriate urgency, hospital department, and care recommendation. You must act like a real clinical triage engine.
 
 **Core Triage Logic & Weighting:**
 

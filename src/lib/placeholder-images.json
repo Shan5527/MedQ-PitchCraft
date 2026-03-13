@@ -1,6 +1,12 @@
 {
   "placeholderImages": [
     {
+      "id": "logo",
+      "description": "MedQ Logo",
+      "imageUrl": "https://thumbs.dreamstime.com/b/patient-consultation-to-doctor-health-care-concept-medical-team-healthy-application-flat-vector-illustration-modern-character-140354299.jpg",
+      "imageHint": "doctor patient consultation"
+    },
+    {
       "id": "home-hero",
       "description": "A continuous line drawing of a doctor consulting with a patient.",
       "imageUrl": "https://thumbs.dreamstime.com/b/one-continuous-line-drawing-young-male-doctor-giving-consultation-session-to-female-patient-reading-medical-record-one-190965697.jpg?w=768",

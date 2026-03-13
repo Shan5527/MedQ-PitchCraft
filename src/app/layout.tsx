@@ -12,7 +12,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'MediFlow',
+  title: 'MedQ',
   description: 'From symptoms to treatment — without the chaos.',
 };
 
