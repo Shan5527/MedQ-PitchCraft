@@ -89,7 +89,7 @@ export default function SymptomCheckerClient({
         severity,
       });
       setResult(response);
-    } catch (err) => {
+    } catch (err) {
       setError('Failed to analyze symptoms. Please try again.');
     } finally {
       setIsLoading(false);
