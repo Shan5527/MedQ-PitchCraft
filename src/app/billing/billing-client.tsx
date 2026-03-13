@@ -80,8 +80,8 @@ export default function BillingClient({
     try {
         const response = await getBillExplanationAction({ billItems });
         setResult(response);
-    } catch (err) {
-        setError('Failed to get explanation. Please try again.');
+    } catch (err: any) {
+        setError(err.message || 'Failed to get explanation. Please try again.');
     } finally {
         setIsLoading(false);
     }

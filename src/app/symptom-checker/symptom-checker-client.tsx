@@ -89,8 +89,8 @@ export default function SymptomCheckerClient({
         severity,
       });
       setResult(response);
-    } catch (err) {
-      setError('Failed to analyze symptoms. Please try again.');
+    } catch (err: any) {
+      setError(err.message || 'Failed to analyze symptoms. Please try again.');
     } finally {
       setIsLoading(false);
     }
@@ -245,7 +245,7 @@ export default function SymptomCheckerClient({
           </RadioGroup>
         </div>
 
-        {error && <p className="text-sm text-destructive">{error}</p>}
+        {error && <Alert variant="destructive"><AlertCircle className="h-4 w-4" /><AlertTitle>Error</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>}
 
         <Button type="submit" size="lg" className="w-full" disabled={isLoading}>
           {isLoading ? (

@@ -97,6 +97,11 @@ const aiSymptomTriageFlow = ai.defineFlow(
   },
   async (input) => {
     const { output } = await aiSymptomTriagePrompt(input);
-    return output!;
+    if (!output) {
+      throw new Error(
+        'The AI model could not provide an analysis. Please try describing your symptoms in more detail.'
+      );
+    }
+    return output;
   }
 );

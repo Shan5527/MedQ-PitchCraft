@@ -71,7 +71,7 @@ const transparentBillingExplainerFlow = ai.defineFlow(
   async input => {
     const {output} = await prompt(input);
     if (!output) {
-      throw new Error('Failed to get output from prompt.');
+      throw new Error('The AI model could not provide an explanation. Please try again.');
     }
     return output;
   }
