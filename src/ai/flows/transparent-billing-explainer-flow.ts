@@ -1,8 +1,8 @@
 'use server';
 /**
- * @fileOverview A Genkit flow for explaining hospital bills.
+ * @fileOverview A Genkit flow for explaining hospital bills from an image.
  *
- * - explainBillItems - A function that handles the explanation of hospital bill items.
+ * - explainBillItems - A function that handles the explanation of hospital bill items from an image.
  * - TransparentBillingExplainerInput - The input type for the explainBillItems function.
  * - TransparentBillingExplainerOutput - The return type for the explainBillItems function.
  */
@@ -11,13 +11,12 @@ import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
 
 // Input Schema
-const BillItemSchema = z.object({
-  name: z.string().describe('The name of the medical service or item.'),
-  amount: z.number().describe('The cost of the medical service or item in local currency.'),
-});
-
 const TransparentBillingExplainerInputSchema = z.object({
-  billItems: z.array(BillItemSchema).describe('A list of items on the hospital bill.'),
+  photoDataUri: z
+    .string()
+    .describe(
+      "A photo of a hospital bill, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+    ),
 });
 
 export type TransparentBillingExplainerInput = z.infer<typeof TransparentBillingExplainerInputSchema>;
@@ -50,13 +49,12 @@ const prompt = ai.definePrompt({
   input: {schema: TransparentBillingExplainerInputSchema},
   output: {schema: TransparentBillingExplainerOutputSchema},
   prompt: `You are an AI assistant specialized in explaining hospital bills to patients clearly and empathetically.
-For each bill item provided, generate a concise explanation, provide an estimated average market cost range (if applicable and you have knowledge of it, otherwise omit), and indicate if the charged amount is higher than the average market cost.
+Analyze the following image of a hospital bill. Extract all line items with their names and amounts. If you find a QR code or barcode, decode it and use its data to supplement your analysis.
 
-Here are the bill items:
-{{#each billItems}}
-- Name: {{{name}}}
-  Amount: {{{amount}}}
-{{/each}}
+For each bill item you identify, generate a concise explanation, provide an estimated average market cost range (if applicable and you have knowledge of it, otherwise omit), and indicate if the charged amount is higher than the average market cost.
+
+Bill Image:
+{{media url=photoDataUri}}
 
 Please return the explanation in a structured JSON format matching the output schema.`,
 });

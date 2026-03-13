@@ -8,14 +8,13 @@ import {
 import BillingClient from './billing-client';
 
 export default async function BillingPage() {
-  async function getBillExplanation(
+  async function analyzeBillImageAction(
     data: TransparentBillingExplainerInput
   ): Promise<TransparentBillingExplainerOutput> {
     'use server';
-    // Add a delay to simulate network latency for a better UX
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // AI image processing can be slow, so no artificial delay is needed.
     return await explainBillItems(data);
   }
 
-  return <BillingClient getBillExplanationAction={getBillExplanation} />;
+  return <BillingClient analyzeBillImageAction={analyzeBillImageAction} />;
 }
