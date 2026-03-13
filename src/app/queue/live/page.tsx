@@ -1,26 +1,13 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import Image from 'next/image';
-import { placeholderImages } from '@/lib/placeholder-images';
 
 export default function LiveQueueTrackerPage() {
     const nextTokens = ["B19", "B20", "B21", "B22"];
     const userToken = "B23";
-    const illustration = placeholderImages.find(p => p.id === 'reception-desk');
 
     return (
         <div className="flex flex-col space-y-6 text-center">
             <header className="space-y-4">
-                 {illustration && (
-                    <Image
-                        src={illustration.imageUrl}
-                        alt={illustration.description}
-                        width={600}
-                        height={400}
-                        data-ai-hint={illustration.imageHint}
-                        className="w-48 h-32 mx-auto object-cover rounded-lg"
-                    />
-                )}
                 <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
                     Live Queue Tracker
                 </h1>

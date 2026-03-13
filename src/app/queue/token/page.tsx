@@ -3,24 +3,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Progress } from '@/components/ui/progress';
 import { User, Forward } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { placeholderImages } from '@/lib/placeholder-images';
 
 export default function DigitalQueueTokenPage() {
-    const illustration = placeholderImages.find(p => p.id === 'hospital-waiting-area');
     return (
         <div className="flex flex-col space-y-6">
             <header className="text-center space-y-4">
-                 {illustration && (
-                    <Image
-                        src={illustration.imageUrl}
-                        alt={illustration.description}
-                        width={600}
-                        height={400}
-                        data-ai-hint={illustration.imageHint}
-                        className="w-48 h-32 mx-auto object-cover rounded-lg"
-                    />
-                )}
                 <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
                     Your Digital Token
                 </h1>

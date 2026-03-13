@@ -31,8 +31,6 @@ import type {
 } from '@/ai/flows/transparent-billing-explainer-flow';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import Image from 'next/image';
-import { placeholderImages } from '@/lib/placeholder-images';
 
 type BillItem = { name: string; amount: number };
 
@@ -55,7 +53,6 @@ export default function BillingClient({
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<TransparentBillingExplainerOutput | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const illustration = placeholderImages.find(p => p.id === 'doctor-explaining-bill');
 
   const handleAddItem = () => {
     if (newItemName && newItemAmount) {
@@ -104,16 +101,6 @@ export default function BillingClient({
     return (
         <div className="space-y-6">
             <header className="text-center space-y-4">
-                 {illustration && (
-                    <Image
-                        src={illustration.imageUrl}
-                        alt={illustration.description}
-                        width={600}
-                        height={400}
-                        data-ai-hint={illustration.imageHint}
-                        className="w-48 h-32 mx-auto object-cover rounded-lg"
-                    />
-                )}
                 <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
                     Your Explained Bill
                 </h1>
@@ -153,16 +140,6 @@ export default function BillingClient({
   return (
     <div className="space-y-6">
       <header className="text-center space-y-4">
-        {illustration && (
-            <Image
-                src={illustration.imageUrl}
-                alt={illustration.description}
-                width={600}
-                height={400}
-                data-ai-hint={illustration.imageHint}
-                className="w-48 h-32 mx-auto object-cover rounded-lg"
-            />
-        )}
         <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
           Understand Your Hospital Bill
         </h1>

@@ -43,8 +43,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 import { Progress } from '@/components/ui/progress';
 import { Textarea } from '@/components/ui/textarea';
-import Image from 'next/image';
-import { placeholderImages } from '@/lib/placeholder-images';
 
 type Step =
   | 'start'
@@ -152,25 +150,12 @@ export default function SymptomCheckerClient({
 const ScreenHeader = ({
   title,
   description,
-  illustrationId,
 }: {
   title: string;
   description?: string;
-  illustrationId?: string;
 }) => {
-  const illustration = placeholderImages.find(p => p.id === illustrationId);
   return (
   <header className="text-center space-y-4">
-    {illustration && (
-      <Image
-        src={illustration.imageUrl}
-        alt={illustration.description}
-        width={600}
-        height={400}
-        data-ai-hint={illustration.imageHint}
-        className="w-48 h-32 mx-auto object-cover rounded-lg"
-      />
-    )}
     <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
       {title}
     </h1>
@@ -194,7 +179,6 @@ const emergencySymptoms = [
 const StartScreen = ({ onStart }: { onStart: () => void }) => (
   <div className="text-center pt-8 space-y-8">
     <ScreenHeader
-      illustrationId='symptom-check-entry'
       title="Let’s understand how you're feeling."
       description="I’ll ask a few quick questions to guide you to the right care."
     />
@@ -214,7 +198,6 @@ const EmergencyCheckScreen = ({
 }) => (
   <div className="space-y-6">
     <ScreenHeader
-      illustrationId='emergency-icon'
       title="Check for Emergency Symptoms"
       description="First, let's rule out a life-threatening emergency. Are you experiencing any of the following?"
     />
@@ -658,8 +641,6 @@ const ResultScreen = ({
 }) => {
   if (!result) return null;
 
-  const illustration = placeholderImages.find(p => p.id === 'doctor-review');
-
   const getUrgencyBadgeVariant = () => {
     switch (result.urgencyLevel) {
       case 'Critical':
@@ -677,7 +658,7 @@ const ResultScreen = ({
 
   return (
     <div className="space-y-6">
-      <ScreenHeader title="AI Risk Analysis Result" illustrationId='doctor-review'/>
+      <ScreenHeader title="AI Risk Analysis Result" />
 
       {result.highPriorityAlert && (
         <Alert variant="warning" className="flex items-start gap-3 p-4">

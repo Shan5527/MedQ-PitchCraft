@@ -2,8 +2,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { BedDouble, Bed, AlertTriangle } from 'lucide-react';
-import Image from 'next/image';
-import { placeholderImages } from '@/lib/placeholder-images';
 
 type Hospital = {
     name: string;
@@ -39,21 +37,9 @@ const hospitals: Hospital[] = [
 ];
 
 export default function BedFinderPage() {
-    const illustration = placeholderImages.find(p => p.id === 'hospital-building');
-
     return (
         <div className="flex flex-col space-y-6">
             <header className="text-center space-y-4">
-                 {illustration && (
-                    <Image
-                        src={illustration.imageUrl}
-                        alt={illustration.description}
-                        width={600}
-                        height={400}
-                        data-ai-hint={illustration.imageHint}
-                        className="w-48 h-32 mx-auto object-cover rounded-lg"
-                    />
-                )}
                 <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
                     Available Beds Nearby
                 </h1>
