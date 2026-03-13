@@ -838,7 +838,7 @@ const ResultScreen = ({
             <AlertDescription>
               Your case is being fast-tracked. You will be placed in a
               fast-track queue.
-            </Alex>
+            </AlertDescription>
           </div>
         </Alert>
       )}
