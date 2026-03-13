@@ -56,50 +56,59 @@ const AISymptomTriageInputSchema = z.object({
   // 15. Mobility Check
   mobilityCheck: z.string().optional().describe('The patient’s ability to move normally.'),
 
-  // 16. Mental Health Check
-  mentalHealthCheck: z.array(z.string()).optional().describe('Mental health symptoms like severe anxiety, panic attacks, or thoughts of self-harm.'),
-
-  // 17. Swelling Check
+  // 16. Swelling Check
   swellingCheck: z.string().optional().describe('Whether there is severe swelling.'),
   
-  // 18. Allergic Reaction Check
+  // 17. Allergic Reaction Check
   allergicReactionCheck: z.array(z.string()).optional().describe('Signs of a severe allergic reaction.'),
 
-  // 19. Pregnancy Status
+  // 18. Pregnancy Status
   pregnancyStatus: z.string().optional().describe('Pregnancy status for female patients.'),
 
-  // 20. Age
+  // 19. Age
   age: z.string().optional().describe('The patient’s age group.'),
 
-  // 21. Existing Conditions
+  // 20. Existing Conditions
   existingConditions: z.array(z.string()).optional().describe('Pre-existing medical conditions.'),
 
-  // 22. Medication Use
+  // 21. Medication Use
   medicationUse: z.string().optional().describe('Whether the patient is currently taking medication.'),
 
-  // 23. Recent Surgery
+  // 22. Recent Surgery
   recentSurgery: z.string().optional().describe('Whether the patient has had recent surgery.'),
 
-  // 24. Infection Exposure
+  // 23. Infection Exposure
   infectionExposure: z.string().optional().describe('Recent exposure to a sick person.'),
   
-  // 25. Travel History
+  // 24. Travel History
   travelHistory: z.string().optional().describe('Recent travel history.'),
   
-  // 26. Symptom Frequency
+  // 25. Symptom Frequency
   symptomFrequency: z.string().optional().describe('How often the symptom occurs.'),
 
-  // 27. Functional Impact
+  // 26. Functional Impact
   functionalImpact: z.string().optional().describe('The symptom’s impact on daily activities.'),
   
-  // 28. Sleep Impact
+  // 27. Sleep Impact
   sleepImpact: z.string().optional().describe('The symptom’s impact on sleep.'),
 
-  // 29. Appetite Change
+  // 28. Appetite Change
   appetiteChange: z.string().optional().describe('Recent changes in appetite.'),
   
-  // 30. Final Concern
+  // 29. Final Concern
   finalConcern: z.string().optional().describe('Whether the patient feels their condition is serious.'),
+
+  // 30. Mental Health Screening
+  feelingNervous: z.string().optional().describe('Response to: "Have you recently been feeling nervous, anxious, or on edge?"'),
+  lostInterest: z.string().optional().describe('Response to: "Have you recently felt little interest or pleasure in doing things you usually enjoy?"'),
+  troubleSleeping: z.string().optional().describe('Response to: "Have you recently had trouble falling asleep or staying asleep because of stress or worry?"'),
+  feelingOverwhelmed: z.string().optional().describe('Response to: "Have you recently felt overwhelmed by daily responsibilities or pressure?"'),
+  feelingDown: z.string().optional().describe('Response to: "Have you recently felt down, sad, or hopeless?"'),
+  troubleConcentrating: z.string().optional().describe('Response to: "Have you recently had difficulty concentrating on work, studies, or everyday tasks?"'),
+  notCopingWell: z.string().optional().describe('Response to: "Have you recently felt that you are not coping well with challenges in your life?"'),
+  feelingTired: z.string().optional().describe('Response to: "Have you recently felt unusually tired or without energy?"'),
+  lostConfidence: z.string().optional().describe('Response to: "Have you recently lost confidence in yourself?"'),
+  feelingLonely: z.string().optional().describe('Response to: "Have you recently felt lonely or emotionally unsupported?"'),
 });
 
 
@@ -121,6 +130,8 @@ const AISymptomTriageOutputSchema = z.object({
   highPriorityAlert: z
     .boolean()
     .describe('True if the case is high priority and should be fast-tracked.'),
+  mentalWellnessLevel: z.string().optional().describe("An estimation of the user's mental wellness level (e.g., 'Emotional health appears stable', 'Mild stress detected')."),
+  mentalHealthRecommendations: z.array(z.string()).optional().describe('A list of supportive suggestions for mental well-being.'),
 });
 export type AISymptomTriageOutput = z.infer<typeof AISymptomTriageOutputSchema>;
 
@@ -134,7 +145,7 @@ const aiSymptomTriagePrompt = ai.definePrompt({
   name: 'aiSymptomTriagePrompt',
   input: { schema: AISymptomTriageInputSchema },
   output: { schema: AISymptomTriageOutputSchema },
-  prompt: `You are MedQ, a world-class AI triage system for a modern hospital. Your purpose is to analyze a patient's responses to a universal 30-question medical questionnaire and determine the appropriate urgency, hospital department, and care recommendation. You must act like a real clinical triage engine.
+  prompt: `You are MedQ, a world-class AI triage system for a modern hospital. Your purpose is to analyze a patient's responses to a medical questionnaire and determine the appropriate urgency, hospital department, and care recommendation. You must act like a real clinical triage engine.
 
 **Core Triage Logic & Weighting:**
 
@@ -142,7 +153,6 @@ const aiSymptomTriagePrompt = ai.definePrompt({
     *   'Severe' or 'Worst pain imaginable' severity, especially if sudden.
     *   'Severe difficulty' breathing, 'Yes' to loss of consciousness, or 'Yes' to uncontrolled bleeding are **CRITICAL EMERGENCIES**. Route directly to the Emergency Room with 'Critical' urgency.
     *   Symptoms like confusion, slurred speech, severe chest pressure, or facial swelling are also high-risk indicators requiring 'High' or 'Critical' urgency.
-    *   Thoughts of self-harm require an urgent 'High' priority referral to Mental Health/Psychiatry.
 
 2.  **Urgency Score Calculation:**
     *   **High Urgency:** Combine factors like 'Severe' symptoms, 'Getting worse quickly', high pain scale (>7), new and concerning symptoms (e.g., neurological, cardiac), and significant functional impact.
@@ -159,6 +169,22 @@ const aiSymptomTriagePrompt = ai.definePrompt({
     *   **General Medicine:** For non-specific issues like fever, fatigue, or when other categories don't fit.
     *   **Dermatology:** For skin problems.
     *   **Psychiatry/Mental Health:** For anxiety, depression, self-harm thoughts.
+
+4.  **Mental Health Assessment:**
+    *   If the user has completed the mental health questionnaire, analyze their responses to assess their emotional well-being.
+    *   **Scoring:** Assign points for each answer: 'Not at all' = 0, 'Several days' = 1, 'More than half the days' = 2, 'Nearly every day' = 3.
+    *   **Wellness Level (\`mentalWellnessLevel\`):**
+        *   0-5 points: 'Emotional health appears stable'
+        *   6-10 points: 'Mild stress detected'
+        *   11-15 points: 'Moderate emotional distress detected'
+        *   16-30 points: 'High stress or emotional concern detected'
+    *   **Recommendations (\`mentalHealthRecommendations\`):**
+        *   For Mild stress: Suggest 'Practice relaxation or breathing exercises', 'Improve sleep routine', 'Engage in enjoyable hobbies'.
+        *   For Moderate distress: Add suggestions like 'Talk to a trusted friend or family member' and 'Consider speaking with a mental health professional'.
+        *   For High concern: Strongly recommend 'Talk to a mental health expert soon.' and 'If you are in crisis, please contact a helpline immediately.'.
+    *   **Urgency & Department:**
+        *   Set \`recommendedDepartment\` to 'Psychiatry/Mental Health'.
+        *   Set \`urgencyLevel\` based on the wellness level: 'Low' for stable/mild, 'Moderate' for moderate, and 'High' for high concern. If a user ever implies self-harm, immediately set urgency to 'Critical'.
 
 **Patient's Completed Triage Form:**
 
@@ -182,8 +208,19 @@ const aiSymptomTriagePrompt = ai.definePrompt({
 {{#if neurologicalSymptoms}}- Neurological Symptoms: {{#each neurologicalSymptoms}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}}
 {{#if heartRiskSignals}}- Heart Risk Signals: {{#each heartRiskSignals}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}}
 {{#if digestiveSignals}}- Digestive Signals: {{#each digestiveSignals}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}}
-{{#if mentalHealthCheck}}- Mental Health Concerns: {{#each mentalHealthCheck}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}}
 {{#if allergicReactionCheck}}- Allergic Reaction Signs: {{#each allergicReactionCheck}}{{{this}}}{{#unless @last}}, {{/unless}}{{/each}}{{/if}}
+
+**Mental Health Screening**
+{{#if feelingNervous}}- Feeling nervous, anxious, or on edge: {{{feelingNervous}}}{{/if}}
+{{#if lostInterest}}- Little interest or pleasure in doing things: {{{lostInterest}}}{{/if}}
+{{#if troubleSleeping}}- Trouble sleeping due to stress: {{{troubleSleeping}}}{{/if}}
+{{#if feelingOverwhelmed}}- Feeling overwhelmed: {{{feelingOverwhelmed}}}{{/if}}
+{{#if feelingDown}}- Feeling down, sad, or hopeless: {{{feelingDown}}}{{/if}}
+{{#if troubleConcentrating}}- Difficulty concentrating: {{{troubleConcentrating}}}{{/if}}
+{{#if notCopingWell}}- Not coping well with challenges: {{{notCopingWell}}}{{/if}}
+{{#if feelingTired}}- Unusually tired or without energy: {{{feelingTired}}}{{/if}}
+{{#if lostConfidence}}- Lost confidence in yourself: {{{lostConfidence}}}{{/if}}
+{{#if feelingLonely}}- Feeling lonely or unsupported: {{{feelingLonely}}}{{/if}}
 
 **Patient Context & Risk Factors**
 {{#if age}}- Age Group: {{{age}}}{{/if}}
@@ -202,7 +239,7 @@ const aiSymptomTriagePrompt = ai.definePrompt({
 {{#if finalConcern}}- Patient's Own Assessment: {{{finalConcern}}}{{/if}}
 ---
 
-Based on this comprehensive data, provide a structured JSON output. Set 'highPriorityAlert' to true if urgency is 'High' or 'Critical'. The explanation should be concise and justify your recommendation based on the provided symptoms.
+Based on this comprehensive data, provide a structured JSON output. If it is a mental health screening, populate the 'mentalWellnessLevel' and 'mentalHealthRecommendations' fields. Otherwise, leave them null. Set 'highPriorityAlert' to true if urgency is 'High' or 'Critical'. The explanation should be concise and justify your recommendation.
 `,
 });
 

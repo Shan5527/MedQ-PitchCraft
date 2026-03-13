@@ -20,6 +20,7 @@ import {
   Layers,
   Bandage,
   ChevronRight,
+  Sparkles,
 } from 'lucide-react';
 import type {
   AISymptomTriageInput,
@@ -42,12 +43,12 @@ import Link from 'next/link';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
 import { Progress } from '@/components/ui/progress';
-import { Textarea } from '@/components/ui/textarea';
 
 type Step =
   | 'start'
   | 'emergencyCheck'
   | 'triageForm'
+  | 'mentalHealthFlow'
   | 'loading'
   | 'result'
   | 'emergency';
@@ -130,6 +131,19 @@ export default function SymptomCheckerClient({
             prevStep={prevFormStep}
             onSubmit={handleTriageSubmit}
             error={error}
+            setStep={setStep}
+          />
+        );
+      case 'mentalHealthFlow':
+        return (
+          <MentalHealthFlow
+            answers={answers}
+            updateAnswer={updateAnswer}
+            onSubmit={handleTriageSubmit}
+            onBack={() => {
+              setStep('triageForm');
+              setFormStep(1);
+            }}
           />
         );
       case 'loading':
@@ -153,15 +167,17 @@ const ScreenHeader = ({
   description?: string;
 }) => {
   return (
-  <header className="text-center space-y-2">
-    <h1 className="text-2xl font-bold tracking-tight text-primary font-headline">
-      {title}
-    </h1>
-    {description && (
-      <p className="text-muted-foreground mt-1 max-w-md mx-auto">{description}</p>
-    )}
-  </header>
-  )
+    <header className="text-center space-y-2">
+      <h1 className="text-2xl font-bold tracking-tight text-primary font-headline">
+        {title}
+      </h1>
+      {description && (
+        <p className="text-muted-foreground mt-1 max-w-md mx-auto">
+          {description}
+        </p>
+      )}
+    </header>
+  );
 };
 
 // Initial & Emergency Screens
@@ -184,7 +200,9 @@ const StartScreen = ({ onStart }: { onStart: () => void }) => (
       <Button size="lg" className="w-full max-w-xs" onClick={onStart}>
         Start Health Check
       </Button>
-      <p className="text-sm text-muted-foreground mt-2">Takes about 2 minutes.</p>
+      <p className="text-sm text-muted-foreground mt-2">
+        Takes about 2 minutes.
+      </p>
     </div>
   </div>
 );
@@ -234,7 +252,8 @@ const EmergencyScreen = () => (
       Emergency Detected
     </AlertTitle>
     <AlertDescription className="text-base mt-2">
-      Your symptoms may need immediate medical attention. Please proceed immediately to the Emergency Department.
+      Your symptoms may need immediate medical attention. Please proceed
+      immediately to the Emergency Department.
     </AlertDescription>
     <div className="mt-6 flex flex-col gap-3">
       <Button
@@ -259,21 +278,38 @@ const TriageForm = ({
   prevStep,
   onSubmit,
   error,
+  setStep,
 }: any) => {
   const renderFormStep = () => {
     switch (formStep) {
       case 1:
-        return <FormStep1 answers={answers} updateAnswer={updateAnswer} nextStep={nextStep} />;
+        return (
+          <FormStep1
+            updateAnswer={updateAnswer}
+            nextStep={nextStep}
+            setStep={setStep}
+          />
+        );
       case 2:
-        return <FormStep2 answers={answers} updateAnswer={updateAnswer} />;
+        return (
+          <FormStep2 answers={answers} updateAnswer={updateAnswer} />
+        );
       case 3:
-        return <FormStep3 answers={answers} updateAnswer={updateAnswer} />;
+        return (
+          <FormStep3 answers={answers} updateAnswer={updateAnswer} />
+        );
       case 4:
-        return <FormStep4 answers={answers} updateAnswer={updateAnswer} />;
+        return (
+          <FormStep4 answers={answers} updateAnswer={updateAnswer} />
+        );
       case 5:
-        return <FormStep5 answers={answers} updateAnswer={updateAnswer} />;
+        return (
+          <FormStep5 answers={answers} updateAnswer={updateAnswer} />
+        );
       case 6:
-        return <FormStep6 answers={answers} updateAnswer={updateAnswer} />;
+        return (
+          <FormStep6 answers={answers} updateAnswer={updateAnswer} />
+        );
       default:
         return null;
     }
@@ -292,9 +328,13 @@ const TriageForm = ({
       )}
 
       {formStep > 0 && (
-         <div className="flex justify-between items-center pt-4">
-          <Button variant="outline" onClick={formStep === 1 ? () => window.location.reload() : prevStep}>
-            <ArrowLeft className="mr-2 h-4 w-4" /> {formStep === 1 ? 'Cancel' : 'Previous'}
+        <div className="flex justify-between items-center pt-4">
+          <Button
+            variant="outline"
+            onClick={formStep === 1 ? () => window.location.reload() : prevStep}
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />{' '}
+            {formStep === 1 ? 'Cancel' : 'Previous'}
           </Button>
           {formStep < TOTAL_FORM_STEPS ? (
             <Button onClick={nextStep} size="lg">
@@ -342,7 +382,11 @@ const RadioQuestion = ({
     className="grid grid-cols-2 gap-3"
   >
     {options.map((opt) => (
-      <Label key={opt} htmlFor={opt.replace(/\s+/g, '')} className="flex items-center space-x-2 rounded-lg border p-3 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all">
+      <Label
+        key={opt}
+        htmlFor={opt.replace(/\s+/g, '')}
+        className="flex items-center space-x-2 rounded-lg border p-3 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all"
+      >
         <RadioGroupItem value={opt} id={opt.replace(/\s+/g, '')} />
         <span className="font-normal">{opt}</span>
       </Label>
@@ -361,7 +405,11 @@ const CheckboxQuestion = ({
 }) => (
   <div className="grid grid-cols-2 gap-3">
     {options.map((opt) => (
-      <Label key={opt} htmlFor={opt.replace(/\s+/g, '')} className="flex items-center space-x-2 rounded-lg border p-3 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all">
+      <Label
+        key={opt}
+        htmlFor={opt.replace(/\s+/g, '')}
+        className="flex items-center space-x-2 rounded-lg border p-3 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all"
+      >
         <Checkbox
           id={opt.replace(/\s+/g, '')}
           checked={value.includes(opt)}
@@ -374,36 +422,44 @@ const CheckboxQuestion = ({
 );
 
 const symptomCategories = [
-    { name: 'General Symptoms', icon: Thermometer, concern: 'Fever' },
-    { name: 'Respiratory', icon: Activity, concern: 'Breathing problem' },
-    { name: 'Cardiac', icon: Heart, concern: 'Chest pain' },
-    { name: 'Digestive', icon: ClipboardList, concern: 'Stomach pain' },
-    { name: 'Neurological', icon: Brain, concern: 'Headache' },
-    { name: 'Skin', icon: Layers, concern: 'Skin problem' },
-    { name: 'Orthopedic', icon: Bone, concern: 'Joint or muscle pain' },
-    { name: 'Women’s Health', icon: Baby, concern: 'Pregnancy concerns' },
-    { name: 'Mental Health', icon: Smile, concern: 'Mental health concern' },
-    { name: 'Injury', icon: Bandage, concern: 'Injury' },
+  { name: 'General Symptoms', icon: Thermometer, concern: 'Fever' },
+  { name: 'Respiratory', icon: Activity, concern: 'Breathing problem' },
+  { name: 'Cardiac', icon: Heart, concern: 'Chest pain' },
+  { name: 'Digestive', icon: ClipboardList, concern: 'Stomach pain' },
+  { name: 'Neurological', icon: Brain, concern: 'Headache' },
+  { name: 'Skin', icon: Layers, concern: 'Skin problem' },
+  { name: 'Orthopedic', icon: Bone, concern: 'Joint or muscle pain' },
+  { name: 'Women’s Health', icon: Baby, concern: 'Pregnancy concerns' },
+  { name: 'Mental Health', icon: Smile, concern: 'Mental health concern' },
+  { name: 'Injury', icon: Bandage, concern: 'Injury' },
 ];
 
-const FormStep1 = ({ updateAnswer, nextStep }: any) => {
-    const handleSelectCategory = (concern: string) => {
-        updateAnswer('mainConcern', concern);
-        nextStep();
+const FormStep1 = ({ updateAnswer, nextStep, setStep }: any) => {
+  const handleSelectCategory = (concern: string) => {
+    updateAnswer('mainConcern', concern);
+    if (concern === 'Mental health concern') {
+      setStep('mentalHealthFlow');
+    } else {
+      nextStep();
     }
-    return (
-        <FormQuestion title="What’s bothering you today?">
-             <div className="grid grid-cols-2 gap-3 pt-2">
-                {symptomCategories.map(({name, icon: Icon, concern}) => (
-                    <button key={name} onClick={() => handleSelectCategory(concern)} className="flex flex-col items-center justify-center space-y-2 p-4 border rounded-lg hover:bg-primary/5 hover:border-primary transition-colors text-center h-28">
-                        <Icon className="h-8 w-8 text-primary" />
-                        <span className="text-sm font-medium">{name}</span>
-                    </button>
-                ))}
-             </div>
-        </FormQuestion>
-    )
-}
+  };
+  return (
+    <FormQuestion title="What’s bothering you today?">
+      <div className="grid grid-cols-2 gap-3 pt-2">
+        {symptomCategories.map(({ name, icon: Icon, concern }) => (
+          <button
+            key={name}
+            onClick={() => handleSelectCategory(concern)}
+            className="flex flex-col items-center justify-center space-y-2 p-4 border rounded-lg hover:bg-primary/5 hover:border-primary transition-colors text-center h-28"
+          >
+            <Icon className="h-8 w-8 text-primary" />
+            <span className="text-sm font-medium">{name}</span>
+          </button>
+        ))}
+      </div>
+    </FormQuestion>
+  );
+};
 
 const FormStep2 = ({ answers, updateAnswer }: any) => (
   <div className="space-y-6">
@@ -429,7 +485,9 @@ const FormStep2 = ({ answers, updateAnswer }: any) => (
     </FormQuestion>
     <FormQuestion title="If you have pain, rate it from 0 (no pain) to 10 (worst imaginable).">
       <div className="flex items-center gap-4 pt-2">
-        <span className="font-bold text-lg text-muted-foreground w-8 text-center">0</span>
+        <span className="font-bold text-lg text-muted-foreground w-8 text-center">
+          0
+        </span>
         <Slider
           value={[answers.painScale ?? 0]}
           onValueChange={([v]) => updateAnswer('painScale', v)}
@@ -462,7 +520,12 @@ const FormStep3 = ({ answers, updateAnswer }: any) => (
       <RadioQuestion
         value={answers.breathingCheck}
         onValueChange={(v) => updateAnswer('breathingCheck', v)}
-        options={['No', 'Mild difficulty', 'Moderate difficulty', 'Severe difficulty']}
+        options={[
+          'No',
+          'Mild difficulty',
+          'Moderate difficulty',
+          'Severe difficulty',
+        ]}
       />
     </FormQuestion>
     <FormQuestion title="Have you fainted or lost consciousness?">
@@ -472,7 +535,7 @@ const FormStep3 = ({ answers, updateAnswer }: any) => (
         options={['No', 'Yes']}
       />
     </FormQuestion>
-     <FormQuestion title="Do you currently have a fever?">
+    <FormQuestion title="Do you currently have a fever?">
       <RadioQuestion
         value={answers.feverCheck}
         onValueChange={(v) => updateAnswer('feverCheck', v)}
@@ -483,7 +546,10 @@ const FormStep3 = ({ answers, updateAnswer }: any) => (
 );
 
 const FormStep4 = ({ answers, updateAnswer }: any) => {
-  const handleMultiSelect = (key: keyof AISymptomTriageInput, value: string) => {
+  const handleMultiSelect = (
+    key: keyof AISymptomTriageInput,
+    value: string
+  ) => {
     const current = (answers[key] as string[]) || [];
     const newValues = current.includes(value)
       ? current.filter((v: string) => v !== value)
@@ -504,14 +570,26 @@ const FormStep4 = ({ answers, updateAnswer }: any) => {
         <CheckboxQuestion
           value={answers.neurologicalSymptoms as string[]}
           onValueChange={(v) => handleMultiSelect('neurologicalSymptoms', v)}
-          options={['Confusion', 'Slurred speech', 'Numbness', 'Vision problems', 'None']}
+          options={[
+            'Confusion',
+            'Slurred speech',
+            'Numbness',
+            'Vision problems',
+            'None',
+          ]}
         />
       </FormQuestion>
       <FormQuestion title="Are you experiencing any of these heart-related signals?">
         <CheckboxQuestion
           value={answers.heartRiskSignals as string[]}
           onValueChange={(v) => handleMultiSelect('heartRiskSignals', v)}
-          options={['Chest pressure', 'Pain spreading to arm', 'Sweating', 'Nausea', 'None']}
+          options={[
+            'Chest pressure',
+            'Pain spreading to arm',
+            'Sweating',
+            'Nausea',
+            'None',
+          ]}
         />
       </FormQuestion>
     </div>
@@ -519,7 +597,10 @@ const FormStep4 = ({ answers, updateAnswer }: any) => {
 };
 
 const FormStep5 = ({ answers, updateAnswer }: any) => {
-  const handleMultiSelect = (key: keyof AISymptomTriageInput, value: string) => {
+  const handleMultiSelect = (
+    key: keyof AISymptomTriageInput,
+    value: string
+  ) => {
     const current = (answers[key] as string[]) || [];
     const newValues = current.includes(value)
       ? current.filter((v: string) => v !== value)
@@ -546,7 +627,13 @@ const FormStep5 = ({ answers, updateAnswer }: any) => {
         <CheckboxQuestion
           value={answers.existingConditions as string[]}
           onValueChange={(v) => handleMultiSelect('existingConditions', v)}
-          options={['Heart disease', 'Diabetes', 'Asthma', 'Hypertension', 'None']}
+          options={[
+            'Heart disease',
+            'Diabetes',
+            'Asthma',
+            'Hypertension',
+            'None',
+          ]}
         />
       </FormQuestion>
     </div>
@@ -562,7 +649,7 @@ const FormStep6 = ({ answers, updateAnswer }: any) => (
         options={['Yes, normally', 'With difficulty', 'Not able to function']}
       />
     </FormQuestion>
-     <FormQuestion title="Can you move normally?">
+    <FormQuestion title="Can you move normally?">
       <RadioQuestion
         value={answers.mobilityCheck}
         onValueChange={(v) => updateAnswer('mobilityCheck', v)}
@@ -578,6 +665,87 @@ const FormStep6 = ({ answers, updateAnswer }: any) => (
     </FormQuestion>
   </div>
 );
+
+// Mental Health Flow
+const mentalHealthQuestions = [
+    { key: 'feelingNervous', text: 'Have you recently been feeling nervous, anxious, or on edge?' },
+    { key: 'lostInterest', text: 'Have you recently felt little interest or pleasure in doing things you usually enjoy?' },
+    { key: 'troubleSleeping', text: 'Have you recently had trouble falling asleep or staying asleep because of stress or worry?' },
+    { key: 'feelingOverwhelmed', text: 'Have you recently felt overwhelmed by daily responsibilities or pressure?' },
+    { key: 'feelingDown', text: 'Have you recently felt down, sad, or hopeless?' },
+    { key: 'troubleConcentrating', text: 'Have you recently had difficulty concentrating on work, studies, or everyday tasks?' },
+    { key: 'notCopingWell', text: 'Have you recently felt that you are not coping well with challenges in your life?' },
+    { key: 'feelingTired', text: 'Have you recently felt unusually tired or without energy?' },
+    { key: 'lostConfidence', text: 'Have you recently lost confidence in yourself?' },
+    { key: 'feelingLonely', text: 'Have you recently felt lonely or emotionally unsupported?' },
+];
+
+const mentalHealthAnswerOptions = ['Not at all', 'Several days', 'More than half the days', 'Nearly every day'];
+
+const MentalHealthFlow = ({ answers, updateAnswer, onSubmit, onBack }: any) => {
+  const [questionIndex, setQuestionIndex] = useState(-1); // -1 for intro screen
+
+  const handleAnswer = (key: string, value: string) => {
+    updateAnswer(key, value);
+    if (questionIndex < mentalHealthQuestions.length - 1) {
+      setQuestionIndex(questionIndex + 1);
+    } else {
+      onSubmit();
+    }
+  };
+
+  const handleBack = () => {
+    if (questionIndex > -1) {
+        setQuestionIndex(questionIndex - 1);
+    } else {
+        onBack();
+    }
+  }
+
+  const currentQuestion = mentalHealthQuestions[questionIndex];
+  const progress = ((questionIndex + 1) / mentalHealthQuestions.length) * 100;
+
+  if (questionIndex === -1) {
+    return (
+      <div className="text-center space-y-6">
+        <ScreenHeader title="Mental Wellness Check" />
+        <Card>
+          <CardContent className="p-6">
+            <p className="text-muted-foreground">We would like to ask a few questions to understand how you have been feeling emotionally. Your responses help us provide better support.</p>
+          </CardContent>
+        </Card>
+        <div className="grid grid-cols-2 gap-4">
+            <Button variant="outline" onClick={onBack}><ArrowLeft className="mr-2 h-4 w-4" /> Back</Button>
+            <Button size="lg" onClick={() => setQuestionIndex(0)}>Begin</Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-6">
+        <Progress value={progress} className="w-full" />
+        <FormQuestion title={currentQuestion.text}>
+            <RadioGroup
+                value={answers[currentQuestion.key as keyof typeof answers]}
+                onValueChange={(v) => handleAnswer(currentQuestion.key, v)}
+                className="grid grid-cols-1 gap-3"
+            >
+                {mentalHealthAnswerOptions.map((opt) => (
+                    <Label key={opt} htmlFor={opt.replace(/\s+/g, '')} className="flex items-center space-x-2 rounded-lg border p-3 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all">
+                        <RadioGroupItem value={opt} id={opt.replace(/\s+/g, '')} />
+                        <span className="font-normal">{opt}</span>
+                    </Label>
+                ))}
+            </RadioGroup>
+        </FormQuestion>
+         <Button variant="outline" onClick={handleBack}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> Previous
+          </Button>
+    </div>
+  );
+};
+
 
 // Loading and Result Screens
 const LoadingScreen = () => (
@@ -614,6 +782,48 @@ const ResultScreen = ({
     }
   };
 
+  const isMentalHealthResult = result.mentalWellnessLevel && result.mentalHealthRecommendations;
+
+  if (isMentalHealthResult) {
+    return (
+      <div className="space-y-6">
+        <ScreenHeader title="Mental Wellness Analysis" />
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center justify-between">
+              <span>AI Assessment</span>
+               <Badge variant={getUrgencyBadgeVariant()} className="text-sm">
+                {result.urgencyLevel} Concern
+              </Badge>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <p className="text-sm text-muted-foreground">Wellness Level</p>
+              <p className="font-semibold text-xl">{result.mentalWellnessLevel}</p>
+            </div>
+            <div className="border-t pt-4">
+              <p className="text-sm font-medium">Recommendations</p>
+              <ul className="list-disc list-inside text-muted-foreground space-y-2 mt-2">
+                {result.mentalHealthRecommendations?.map((rec, i) => <li key={i}>{rec}</li>)}
+              </ul>
+            </div>
+          </CardContent>
+        </Card>
+        
+        {(result.urgencyLevel === 'Moderate' || result.urgencyLevel === 'High' || result.urgencyLevel === 'Critical') && (
+           <Button asChild size="lg" className="w-full">
+              <Link href="/experts">Talk to a Mental Health Expert</Link>
+            </Button>
+        )}
+
+        <Button onClick={onReset} variant="ghost" className="w-full">
+          Start Over
+        </Button>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <ScreenHeader title="AI Risk Analysis Result" />
@@ -626,7 +836,8 @@ const ResultScreen = ({
               High Priority Case
             </AlertTitle>
             <AlertDescription>
-              Your case is being fast-tracked. You will be placed in a fast-track queue.
+              Your case is being fast-tracked. You will be placed in a
+              fast-track queue.
             </AlertDescription>
           </div>
         </Alert>
@@ -648,7 +859,9 @@ const ResultScreen = ({
               <p className="text-sm text-muted-foreground">
                 Recommended Department
               </p>
-              <p className="font-semibold text-xl">{result.recommendedDepartment}</p>
+              <p className="font-semibold text-xl">
+                {result.recommendedDepartment}
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-3 text-lg">
