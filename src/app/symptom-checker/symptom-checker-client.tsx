@@ -107,6 +107,7 @@ export default function SymptomCheckerClient({
     try {
       const response = await analyzeSymptomsAction({
         symptomCategory: selectedCategory,
+        symptomsDescription: '',
         followUpAnswers: answers,
       });
       setResult(response);
@@ -176,9 +177,9 @@ const EmergencyCheckScreen = ({ onComplete }: { onComplete: (isEmergency: boolea
         <Card>
             <CardContent className="pt-6 space-y-4">
                 {emergencySymptoms.map(symptom => (
-                    <div key={symptom} className="flex items-center space-x-3 p-3 bg-red-50/50 border border-destructive/20 rounded-lg">
+                    <div key={symptom} className="flex items-center space-x-3 p-3 bg-destructive/10 border border-destructive/20 rounded-lg">
                         <AlertTriangle className="h-5 w-5 text-destructive" />
-                        <span className="font-medium text-destructive-foreground/90">{symptom}</span>
+                        <span className="font-medium text-destructive">{symptom}</span>
                     </div>
                 ))}
             </CardContent>
