@@ -10,7 +10,7 @@ import {
   ArrowLeft,
   Send,
   Thermometer,
-  Lungs,
+  Activity,
   Heart,
   Brain,
   Bone,
@@ -223,10 +223,10 @@ const EmergencyCheckScreen = ({
         {emergencySymptoms.map((symptom) => (
           <div
             key={symptom}
-            className="flex items-center space-x-3 p-3 bg-destructive/10 border border-destructive/20 rounded-lg"
+            className="flex items-center space-x-3 p-3 bg-destructive text-destructive-foreground rounded-lg"
           >
-            <AlertTriangle className="h-5 w-5 text-destructive flex-shrink-0" />
-            <span className="font-medium text-destructive">{symptom}</span>
+            <AlertTriangle className="h-5 w-5 text-destructive-foreground flex-shrink-0" />
+            <span className="font-medium">{symptom}</span>
           </div>
         ))}
       </CardContent>
@@ -406,7 +406,7 @@ const CheckboxQuestion = ({
 
 const symptomCategories = [
     { name: 'General Symptoms', icon: Thermometer, concern: 'Fever' },
-    { name: 'Respiratory', icon: Lungs, concern: 'Breathing problem' },
+    { name: 'Respiratory', icon: Activity, concern: 'Breathing problem' },
     { name: 'Cardiac', icon: Heart, concern: 'Chest pain' },
     { name: 'Digestive', icon: ClipboardList, concern: 'Stomach pain' },
     { name: 'Neurological', icon: Brain, concern: 'Headache' },
