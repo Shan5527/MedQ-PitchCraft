@@ -51,7 +51,7 @@ export default function ExpertListPage() {
     return (
         <div className="space-y-6">
             <header className="text-center">
-                <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
+                <h1 className="text-3xl font-bold tracking-tight text-foreground font-headline">
                     Talk to a Medical Expert
                 </h1>
                 <p className="text-muted-foreground">
@@ -99,11 +99,11 @@ export default function ExpertListPage() {
                     const isOnline = expert.status === 'Online';
                     
                     return (
-                        <Card key={expert.name} className="shadow-sm">
+                        <Card key={expert.name}>
                             <CardContent className="p-4 flex items-center gap-4">
                                 {avatar && (
-                                    <Avatar className="h-20 w-20 border-2 border-primary/20">
-                                        <AvatarImage src={avatar.imageUrl} alt={expert.name} className="opacity-30" />
+                                    <Avatar className="h-20 w-20 border-4 border-white">
+                                        <AvatarImage src={avatar.imageUrl} alt={expert.name} />
                                         <AvatarFallback>{expert.name.charAt(0)}</AvatarFallback>
                                     </Avatar>
                                 )}

@@ -8,56 +8,68 @@ export type ImagePlaceholder = {
 export const placeholderImages: ImagePlaceholder[] = [
     {
       "id": "logo",
-      "description": "MedQ Logo",
-      "imageUrl": "https://thumbs.dreamstime.com/b/patient-consultation-to-doctor-health-care-concept-medical-team-healthy-application-flat-vector-illustration-modern-character-140354299.jpg",
-      "imageHint": "doctor patient consultation"
+      "description": "MedQ 3D Logo",
+      "imageUrl": "https://media.istockphoto.com/id/1321798308/vector/health-insurance-icon.jpg?s=612x612&w=0&k=20&c=i-kP-b1Y2i97uUv12D_3z5s7-M_s_7h6w9TzM9oD0-I=",
+      "imageHint": "3d health shield icon"
     },
     {
       "id": "home-hero",
-      "description": "A continuous line drawing of a doctor consulting with a patient.",
-      "imageUrl": "https://thumbs.dreamstime.com/b/one-continuous-line-drawing-young-male-doctor-giving-consultation-session-to-female-patient-reading-medical-record-one-190965697.jpg?w=768",
-      "imageHint": "doctor patient"
-    },
-    {
-      "id": "home-hero-background",
-      "description": "A caring nurse holding a patient's hand, providing support.",
-      "imageUrl": "https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=",
-      "imageHint": "nurse patient hand"
+      "description": "3D render of a doctor character in a telemedicine concept.",
+      "imageUrl": "https://media.istockphoto.com/id/1453229670/photo/telemedicine-concept-with-3d-render-doctor-character.jpg?s=612x612&w=0&k=20&c=0WJ1d21_8s-Yv2-AYh0UvIxgqB8SjVjKBg2xVcoPjV8=",
+      "imageHint": "3d doctor online"
     },
     {
       "id": "hospital-illustration",
-      "description": "An illustration of a doctor consulting a patient in a hospital ward.",
-      "imageUrl": "https://media.istockphoto.com/id/1400386613/vector/doctor-consults-young-man-with-drip-in-hospital-ward.jpg?s=612x612&w=0&k=20&c=bUO57a_-NeL3N_0_-d8S4ddT3nT6cE1cQT4TBJxLAFw=",
-      "imageHint": "doctor patient ward"
+      "description": "3D illustration of a hospital room with bed and medical equipment.",
+      "imageUrl": "https://media.istockphoto.com/id/1366116895/vector/3d-hospital-room-with-bed-and-medical-equipment.jpg?s=612x612&w=0&k=20&c=e40m5_k9VvnF2s_j6Gq4Y8iVtuWTb82vE1sV0EBRdgo=",
+      "imageHint": "3d hospital room"
     },
     {
       "id": "user-avatar",
-      "description": "A placeholder avatar for a user profile.",
-      "imageUrl": "https://picsum.photos/seed/useravatar/100/100",
-      "imageHint": "person avatar"
+      "description": "A 3D cartoon avatar of a smiling man.",
+      "imageUrl": "https://media.istockphoto.com/id/1413524223/vector/3d-cartoon-avatar-of-smiling-black-man.jpg?s=612x612&w=0&k=20&c=h7kQpS_z-Amk2I3k3myZTR9NNLPB9YJb62n3w3kSg1M=",
+      "imageHint": "3d man avatar"
     },
     {
       "id": "expert-avatar-1",
-      "description": "Avatar for Dr. Priya Sharma",
-      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
-      "imageHint": "doctor silhouette"
+      "description": "3D cartoon avatar of a smiling woman.",
+      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
+      "imageHint": "3d woman avatar"
     },
     {
       "id": "expert-avatar-2",
-      "description": "Avatar for Nurse Raj Singh",
-      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
-      "imageHint": "doctor silhouette"
+      "description": "3D cartoon avatar of a smiling woman.",
+      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
+      "imageHint": "3d woman avatar"
     },
     {
       "id": "expert-avatar-3",
-      "description": "Avatar for Dr. Anjali Mehta",
-      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
-      "imageHint": "doctor silhouette"
+      "description": "3D cartoon avatar of a smiling woman.",
+      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
+      "imageHint": "3d woman avatar"
     },
     {
       "id": "expert-avatar-4",
-      "description": "Avatar for Dr. Vikram Rao",
-      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
-      "imageHint": "doctor silhouette"
+      "description": "3D cartoon avatar of a smiling woman.",
+      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
+      "imageHint": "3d woman avatar"
+    },
+    {
+      "id": "blog-1",
+      "description": "A senior man having a check-up at the doctor's office.",
+      "imageUrl": "https://media.istockphoto.com/id/1418223405/photo/senior-man-having-a-check-up-at-the-doctors-office.jpg?s=612x612&w=0&k=20&c=t1y-iFBc_y9EVqRSDRyDk0YmQW01xLz4aWwS7X-yVb0=",
+      "imageHint": "senior doctor checkup"
+    },
+    {
+      "id": "blog-2",
+      "description": "A female doctor visiting a patient at home.",
+      "imageUrl": "https://media.istockphoto.com/id/1399335803/photo/a-female-doctor-is-visiting-a-patient-at-home.jpg?s=612x612&w=0&k=20&c=qXl8Q52W2sXG4sDqd_fPZgI3b23zN2f-M2v0cGuU8kQ=",
+      "imageHint": "doctor home visit"
+    },
+    {
+      "id": "blog-3",
+      "description": "A beautiful female doctor looking at the camera in her office.",
+      "imageUrl": "https://media.istockphoto.com/id/1325423161/photo/beautiful-female-doctor-looking-at-camera-in-the-office.jpg?s=612x612&w=0&k=20&c=g-wPjybXm-L-d8_fL5XvM2fChyqgttOadY5n_5hYj2Y=",
+      "imageHint": "female doctor"
     }
   ];

@@ -39,9 +39,9 @@ export default function ChatPage() {
     };
 
     return (
-        <div className="flex flex-col h-[calc(100vh-144px)] -m-4 bg-background">
+        <div className="flex flex-col h-[calc(100dvh-144px)] -m-4 bg-background">
             {/* Header */}
-            <header className="flex items-center justify-between p-3 border-b bg-secondary/50">
+            <header className="flex items-center justify-between p-3 border-b bg-card">
                 <div className="flex items-center gap-3">
                     <Button asChild variant="ghost" size="icon">
                         <Link href="/experts">
@@ -50,7 +50,7 @@ export default function ChatPage() {
                     </Button>
                     {expertAvatar && (
                          <Avatar className="h-10 w-10">
-                            <AvatarImage src={expertAvatar.imageUrl} alt="Dr. Priya Sharma" className="opacity-30" />
+                            <AvatarImage src={expertAvatar.imageUrl} alt="Dr. Priya Sharma" />
                             <AvatarFallback>PS</AvatarFallback>
                         </Avatar>
                     )}
@@ -70,7 +70,7 @@ export default function ChatPage() {
                     <div key={msg.id} className={`flex items-end gap-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         {msg.sender === 'expert' && expertAvatar && (
                              <Avatar className="h-8 w-8">
-                                <AvatarImage src={expertAvatar.imageUrl} className="opacity-30" />
+                                <AvatarImage src={expertAvatar.imageUrl} />
                                 <AvatarFallback>PS</AvatarFallback>
                             </Avatar>
                         )}
@@ -83,7 +83,7 @@ export default function ChatPage() {
             </div>
 
             {/* Input */}
-            <footer className="p-3 border-t bg-secondary/50">
+            <footer className="p-3 border-t bg-card">
                 <div className="relative">
                     <Input
                         placeholder="Type your message..."
