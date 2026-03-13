@@ -9,7 +9,7 @@ import {
   Send,
   Building,
   Thermometer,
-  Head,
+  Brain,
   Bone,
   ShieldAlert,
 } from 'lucide-react';
@@ -36,7 +36,7 @@ type Symptom =
 const allSymptoms: { name: Symptom; icon: React.ElementType }[] = [
   { name: 'Fever', icon: Thermometer },
   { name: 'Chest Pain', icon: HeartPulse },
-  { name: 'Headache', icon: Head },
+  { name: 'Headache', icon: Brain },
   { name: 'Stomach Pain', icon: ShieldAlert },
   { name: 'Injury', icon: Bone },
 ];
