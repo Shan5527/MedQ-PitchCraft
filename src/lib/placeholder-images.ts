@@ -20,9 +20,9 @@ export const placeholderImages: ImagePlaceholder[] = [
     },
     {
       "id": "hospital-illustration",
-      "description": "An illustration of a hospital building.",
-      "imageUrl": "https://picsum.photos/seed/hospital/300/200",
-      "imageHint": "hospital building"
+      "description": "An illustration of a doctor consulting a patient in a hospital ward.",
+      "imageUrl": "https://media.istockphoto.com/id/1400386613/vector/doctor-consults-young-man-with-drip-in-hospital-ward.jpg?s=612x612&w=0&k=20&c=bUO57a_-NeL3N_0_-d8S4ddT3nT6cE1cQT4TBJxLAFw=",
+      "imageHint": "doctor patient ward"
     },
     {
       "id": "user-avatar",

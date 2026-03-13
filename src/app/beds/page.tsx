@@ -50,12 +50,12 @@ export default function BedFinderPage() {
                         src={hospitalIllustration.imageUrl}
                         alt={hospitalIllustration.description}
                         width={300}
-                        height={200}
-                        className="mx-auto w-32 object-contain"
+                        height={300}
+                        className="mx-auto w-48 object-contain rounded-lg"
                         data-ai-hint={hospitalIllustration.imageHint}
                     />
                 )}
-                <h1 className="mt-2 text-2xl font-bold tracking-tight text-primary font-headline">
+                <h1 className="mt-4 text-2xl font-bold tracking-tight text-primary font-headline">
                     Available Beds Nearby
                 </h1>
                 <p className="text-muted-foreground">
