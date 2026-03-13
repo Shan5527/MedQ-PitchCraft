@@ -70,14 +70,14 @@ export default function ExpertListPage() {
                             </AlertDescription>
                         </div>
                     </div>
-                    <div className="grid grid-cols-3 gap-3">
-                        <Button variant="destructive" size="sm">
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                        <Button variant="destructive">
                             <Phone className="mr-2 h-4 w-4" /> Call Emergency
                         </Button>
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline">
                             <Building className="mr-2 h-4 w-4" /> Find Hospital
                         </Button>
-                        <Button variant="outline" size="sm">
+                        <Button variant="outline">
                             <Ambulance className="mr-2 h-4 w-4" /> Ambulance
                         </Button>
                     </div>
