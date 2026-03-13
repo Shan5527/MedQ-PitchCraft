@@ -19,6 +19,12 @@ export const placeholderImages: ImagePlaceholder[] = [
       "imageHint": "doctor patient"
     },
     {
+      "id": "home-hero-background",
+      "description": "A caring nurse holding a patient's hand, providing support.",
+      "imageUrl": "https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=",
+      "imageHint": "nurse patient hand"
+    },
+    {
       "id": "hospital-illustration",
       "description": "An illustration of a doctor consulting a patient in a hospital ward.",
       "imageUrl": "https://media.istockphoto.com/id/1400386613/vector/doctor-consults-young-man-with-drip-in-hospital-ward.jpg?s=612x612&w=0&k=20&c=bUO57a_-NeL3N_0_-d8S4ddT3nT6cE1cQT4TBJxLAFw=",

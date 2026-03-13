@@ -34,27 +34,37 @@ export default function Home() {
   ];
   
   const heroBanner = placeholderImages.find(p => p.id === 'home-hero');
+  const heroBackground = placeholderImages.find(p => p.id === 'home-hero-background');
 
   return (
     <div className="flex flex-col space-y-6">
-      {heroBanner && (
-        <Card className="overflow-hidden border-none bg-primary/10 shadow-none">
-          <CardContent className="flex flex-col items-center p-6 text-center md:flex-row md:p-8 md:text-left">
-            <Image
-                src={heroBanner.imageUrl}
-                alt={heroBanner.description}
-                width={300}
-                height={200}
-                className="w-48 object-contain md:w-56"
-                data-ai-hint={heroBanner.imageHint}
-            />
-            <div className="mt-4 md:mt-0 md:ml-8">
-                <h2 className="text-2xl font-bold text-primary font-headline lg:text-3xl">
-                  Find the right care, faster
-                </h2>
-                <p className="mt-2 text-muted-foreground lg:text-lg">We’ll guide you through every step.</p>
-            </div>
-          </CardContent>
+      {heroBanner && heroBackground && (
+        <Card className="relative overflow-hidden border-none bg-primary/10 shadow-none">
+          <Image
+            src={heroBackground.imageUrl}
+            alt={heroBackground.description}
+            fill
+            className="object-cover opacity-20"
+            data-ai-hint={heroBackground.imageHint}
+          />
+          <div className="relative">
+            <CardContent className="flex flex-col items-center p-6 text-center md:flex-row md:p-8 md:text-left">
+              <Image
+                  src={heroBanner.imageUrl}
+                  alt={heroBanner.description}
+                  width={300}
+                  height={200}
+                  className="w-48 flex-shrink-0 object-contain md:w-56"
+                  data-ai-hint={heroBanner.imageHint}
+              />
+              <div className="mt-4 md:mt-0 md:ml-8">
+                  <h2 className="text-2xl font-bold text-primary font-headline lg:text-3xl">
+                    Find the right care, faster
+                  </h2>
+                  <p className="mt-2 text-muted-foreground lg:text-lg">We’ll guide you through every step.</p>
+              </div>
+            </CardContent>
+          </div>
         </Card>
       )}
 
