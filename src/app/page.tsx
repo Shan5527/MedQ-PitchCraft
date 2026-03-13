@@ -56,7 +56,7 @@ export default function Home() {
         </Card>
       )}
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         {actions.map(action => (
           <Link href={action.href} key={action.label}>
             <Card className="h-full hover:border-primary hover:bg-primary/5 transition-all">

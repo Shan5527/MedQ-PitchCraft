@@ -84,7 +84,7 @@ export default function ProfileClient({ userProfile, healthOverview, healthTrend
             {/* Health Overview */}
             <div>
                 <h2 className="text-xl font-bold mb-4 px-1">Health Overview</h2>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
                     {healthOverview.map((item: any) => {
                        const Icon = iconMap[item.icon as keyof typeof iconMap] || Activity;
                        const getStatusVariant = (status: string) => {

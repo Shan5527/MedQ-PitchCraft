@@ -31,14 +31,12 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
       <body className="font-body antialiased">
-        <div className="w-full bg-secondary/50">
-          <div className="relative mx-auto flex min-h-screen w-full max-w-lg flex-col bg-background shadow-2xl">
-            <AppHeader />
-            <main className="flex-1">
-              <div className="flex-1 p-4">{children}</div>
-            </main>
-            <AppNav />
-          </div>
+        <div className="relative flex min-h-screen flex-col bg-background">
+          <AppHeader />
+          <main className="mx-auto w-full max-w-5xl flex-1 p-4">
+            {children}
+          </main>
+          <AppNav />
         </div>
         <Toaster />
       </body>

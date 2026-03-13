@@ -93,7 +93,7 @@ export default function ExpertListPage() {
                 </TabsList>
             </Tabs>
 
-            <div className="space-y-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {experts.map((expert) => {
                     const avatar = placeholderImages.find(p => p.id === expert.avatarId);
                     const isOnline = expert.status === 'Online';
