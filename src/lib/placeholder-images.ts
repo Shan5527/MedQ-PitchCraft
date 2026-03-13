@@ -5,4 +5,35 @@ export type ImagePlaceholder = {
   imageHint: string;
 };
 
-export const placeholderImages: ImagePlaceholder[] = [];
+export const placeholderImages: ImagePlaceholder[] = [
+    {
+      "id": "medicine",
+      "description": "A collection of pills and a medicine bottle.",
+      "imageUrl": "https://picsum.photos/seed/medicine/200/200",
+      "imageHint": "medicine pills"
+    },
+    {
+      "id": "lab-tests",
+      "description": "A gloved hand holding a lab test tube.",
+      "imageUrl": "https://picsum.photos/seed/labtest/200/200",
+      "imageHint": "lab test"
+    },
+    {
+      "id": "doctor-consult",
+      "description": "An illustration of a friendly doctor.",
+      "imageUrl": "https://picsum.photos/seed/doctor/200/200",
+      "imageHint": "doctor illustration"
+    },
+    {
+      "id": "branded-substitute",
+      "description": "An illustration of a pill with a rupee symbol.",
+      "imageUrl": "https://picsum.photos/seed/substitute/200/200",
+      "imageHint": "pill money"
+    },
+    {
+      "id": "promo-banner",
+      "description": "A promotional banner showing doctors available for consultation.",
+      "imageUrl": "https://picsum.photos/seed/promobanner/800/400",
+      "imageHint": "doctors team"
+    }
+  ];

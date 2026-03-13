@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import BottomNav from '@/components/layout/BottomNav';
 import { Inter } from 'next/font/google';
 
 const inter = Inter({
@@ -25,9 +24,8 @@ export default function RootLayout({
       <body className="font-body antialiased">
         <div className="relative flex min-h-screen w-full flex-col">
           <main className="mx-auto w-full max-w-lg flex-1 bg-background">
-            <div className="flex-1 p-4 pb-24">{children}</div>
+            <div className="flex-1 p-4">{children}</div>
           </main>
-          <BottomNav />
         </div>
         <Toaster />
       </body>
