@@ -19,12 +19,12 @@ export default function AppHeader() {
   };
   
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-secondary">
+    <header className="sticky top-0 z-40 w-full border-b bg-primary text-primary-foreground">
       <div className="mx-auto flex h-20 max-w-lg items-center justify-between px-4">
         <div>
            {pathname === '/' && logo ? (
             <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-12 w-12">
+              <div className="relative h-16 w-16">
                 <Image
                     src={logo.imageUrl}
                     alt="MedQ Logo"
@@ -35,12 +35,13 @@ export default function AppHeader() {
                 />
               </div>
               <div>
-                <h1 className="text-xl font-bold text-primary font-headline">MedQ</h1>
-                <p className="text-xs text-muted-foreground">from symptoms to treatment — without the chaos.</p>
+                <h1 className="text-3xl font-bold font-headline">
+                  Med<span className="text-destructive">Q</span>
+                </h1>
               </div>
             </Link>
            ) : (
-             <h1 className="text-xl font-bold text-primary font-headline">
+             <h1 className="text-2xl font-bold font-headline">
               {getTitle()}
              </h1>
            )}
