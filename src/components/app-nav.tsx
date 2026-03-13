@@ -15,7 +15,7 @@ export default function AppNav() {
 
   return (
     <nav className="sticky bottom-0 z-40 mt-auto w-full border-t bg-background/95">
-      <div className="mx-auto grid h-16 max-w-lg grid-cols-3 items-center">
+      <div className="grid h-16 grid-cols-3 items-center">
         {navItems.map((item) => {
           // A more robust check for active state
           const isActive = (pathname === '/' && item.href === '/') || 
