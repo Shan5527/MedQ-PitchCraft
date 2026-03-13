@@ -8,7 +8,7 @@ import {
 import SymptomCheckerClient from './symptom-checker-client';
 
 export default async function SymptomCheckerPage() {
-  async function analyzeSymptoms(
+  async function analyzeSymptomsAction(
     data: AISymptomTriageInput
   ): Promise<AISymptomTriageOutput> {
     'use server';
@@ -17,5 +17,5 @@ export default async function SymptomCheckerPage() {
     return await aiSymptomTriage(data);
   }
 
-  return <SymptomCheckerClient analyzeSymptomsAction={analyzeSymptoms} />;
+  return <SymptomCheckerClient analyzeSymptomsAction={analyzeSymptomsAction} />;
 }

@@ -4,7 +4,7 @@ import { Toaster } from '@/components/ui/toaster';
 import BottomNav from '@/components/layout/BottomNav';
 
 export const metadata: Metadata = {
-  title: 'MediW',
+  title: 'MediFlow',
   description: 'From symptoms to treatment — without the chaos.',
 };
 

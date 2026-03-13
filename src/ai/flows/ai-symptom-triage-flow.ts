@@ -10,20 +10,29 @@
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
+const SymptomCategorySchema = z.enum([
+  'General',
+  'Respiratory',
+  'Cardiac',
+  'Digestive',
+  'Neurological',
+  'Skin',
+  'Orthopedic',
+  'WomensHealth',
+  'MentalHealth',
+  'Injury',
+]);
+export type SymptomCategory = z.infer<typeof SymptomCategorySchema>;
+
 const AISymptomTriageInputSchema = z.object({
-  symptoms: z
-    .array(z.string())
-    .describe('A list of symptoms reported by the patient.'),
-  symptomsDescription: z
-    .string()
-    .describe("A free-text description of the patient's symptoms."),
-  duration: z
-    .enum(['Today', '1–3 days', 'More than 3 days'])
-    .describe('Duration of symptoms.'),
-  severity: z
-    .enum(['Mild', 'Moderate', 'Severe'])
-    .describe('Severity of symptoms.')
-    .default('Moderate'),
+  symptomCategory: SymptomCategorySchema.describe(
+    'The primary symptom category selected by the patient.'
+  ),
+  followUpAnswers: z
+    .record(z.string(), z.union([z.string(), z.array(z.string()), z.boolean()]))
+    .describe(
+      'A key-value map of answers to dynamic follow-up questions related to the symptom category.'
+    ),
 });
 export type AISymptomTriageInput = z.infer<typeof AISymptomTriageInputSchema>;
 
@@ -32,26 +41,17 @@ const AISymptomTriageOutputSchema = z.object({
     .string()
     .describe('The recommended hospital department.'),
   urgencyLevel: z
-    .string()
-    .describe('The urgency level for seeking medical attention.')
-    .default('Moderate'),
+    .enum(['Low', 'Moderate', 'High', 'Critical'])
+    .describe('The urgency level for seeking medical attention.'),
   estimatedWaitTimeMinutes: z
     .number()
     .describe('Estimated wait time in minutes.'),
-  confidencePercentage: z
-    .number()
-    .describe('Confidence percentage for the estimated wait time.')
-    .min(0)
-    .max(100),
-  emergencyAlert: z
-    .boolean()
-    .describe(
-      'True if an emergency is detected, requiring immediate attention.'
-    ),
-  emergencyMessage: z
+  explanation: z
     .string()
-    .optional()
-    .describe('Message to display if an emergency is detected.'),
+    .describe('A brief, clear explanation for the recommendation.'),
+  highPriorityAlert: z
+    .boolean()
+    .describe('True if the case is high priority and should be fast-tracked.'),
 });
 export type AISymptomTriageOutput = z.infer<typeof AISymptomTriageOutputSchema>;
 
@@ -65,28 +65,25 @@ const aiSymptomTriagePrompt = ai.definePrompt({
   name: 'aiSymptomTriagePrompt',
   input: { schema: AISymptomTriageInputSchema },
   output: { schema: AISymptomTriageOutputSchema },
-  prompt: `You are a sophisticated AI healthcare triage system. Your goal is to conduct a detailed analysis of patient symptoms to recommend the most appropriate hospital department, an accurate urgency level, an estimated wait time, and issue an emergency alert for critical conditions.
+  prompt: `You are MediFlow, an advanced AI triage system for a hospital. Your primary function is to analyze patient-reported symptoms and provide a safe and accurate recommendation for care. You must act like a real hospital triage system, following a structured logic to determine the appropriate department and urgency.
 
-Analyze the combination of structured symptom tags and the patient's free-text description. The free-text description provides crucial context that should be weighed heavily.
+**Triage Logic:**
+1.  **Analyze Category and Answers:** The user provides a primary symptom category and answers to specific follow-up questions.
+2.  **Risk Assessment:** Based on the combination of symptoms, determine the risk level. Pay close attention to high-risk combinations (e.g., 'Cardiac' category with 'Sharp' chest pain and 'Shortness of breath').
+3.  **Department Recommendation:** Map the symptoms to the most appropriate hospital department (e.g., Cardiology, General Medicine, Neurology, Orthopedics, etc.).
+4.  **Urgency Level:** Assign an urgency level: 'Low', 'Moderate', 'High', or 'Critical'.
+5.  **High Priority Alert:** If the urgency is 'High' or 'Critical', set 'highPriorityAlert' to true.
+6.  **Explanation:** Provide a clear, simple explanation for your recommendation.
+7.  **Wait Time:** Estimate a realistic wait time in minutes based on the urgency and department.
 
-Patient's reported information:
-Symptom Tags: {{{symptoms}}}
-{{#if symptomsDescription}}
-Symptom Description: {{{symptomsDescription}}}
-{{/if}}
-Duration: {{{duration}}}
-Severity: {{{severity}}}
+**Patient's Reported Information:**
+Symptom Category: {{{symptomCategory}}}
+Follow-up Answers:
+{{#each followUpAnswers}}
+- {{ @key }}: {{{ this }}}
+{{/each}}
 
-Based on a comprehensive analysis of all the information provided, provide the following:
-- Recommended Hospital Department: (e.g., General Medicine, Emergency, Cardiology, Neurology, Orthopedics, Gastroenterology). Your recommendation should be precise.
-- Urgency Level: (e.g., Low, Moderate, High, Critical).
-- Estimated Wait Time (in minutes): Provide a realistic estimate.
-- Confidence Percentage: Your confidence in the estimation and recommendation.
-- Emergency Alert: If symptoms suggest a life-threatening condition (e.g., signs of stroke, heart attack, severe breathing difficulty, major trauma), set 'emergencyAlert' to true and 'emergencyMessage' to "Emergency Detected — Your symptoms may indicate a critical condition. Please proceed immediately to the Emergency Ward or call for an ambulance." Otherwise, set 'emergencyAlert' to false.
-
-Pay close attention to nuanced descriptions in the free-text field. For example, "crushing chest pain radiating to the left arm" is far more critical than a simple 'Chest Pain' tag.
-
-Ensure your output adheres strictly to the AISymptomTriageOutputSchema.
+Based on this, provide a structured JSON output. Ensure your response strictly adheres to the AISymptomTriageOutputSchema.
 `,
 });
 
@@ -100,7 +97,7 @@ const aiSymptomTriageFlow = ai.defineFlow(
     const { output } = await aiSymptomTriagePrompt(input);
     if (!output) {
       throw new Error(
-        'The AI model could not provide an analysis. Please try describing your symptoms in more detail.'
+        'The AI model could not provide an analysis. Please try again with more details.'
       );
     }
     return output;
