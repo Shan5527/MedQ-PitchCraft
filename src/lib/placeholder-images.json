@@ -2,15 +2,21 @@
   "placeholderImages": [
     {
       "id": "logo",
-      "description": "MedQ 3D Logo",
-      "imageUrl": "https://media.istockphoto.com/id/1321798308/vector/health-insurance-icon.jpg?s=612x612&w=0&k=20&c=i-kP-b1Y2i97uUv12D_3z5s7-M_s_7h6w9TzM9oD0-I=",
-      "imageHint": "3d health shield icon"
+      "description": "Patient consultation with doctor logo",
+      "imageUrl": "https://thumbs.dreamstime.com/b/patient-consultation-to-doctor-health-care-concept-medical-team-healthy-application-flat-vector-illustration-modern-character-140354299.jpg",
+      "imageHint": "doctor patient logo"
     },
     {
       "id": "home-hero",
-      "description": "3D render of a doctor character in a telemedicine concept.",
-      "imageUrl": "https://media.istockphoto.com/id/1453229670/photo/telemedicine-concept-with-3d-render-doctor-character.jpg?s=612x612&w=0&k=20&c=0WJ1d21_8s-Yv2-AYh0UvIxgqB8SjVjKBg2xVcoPjV8=",
-      "imageHint": "3d doctor online"
+      "description": "Line drawing of a doctor consulting with a patient.",
+      "imageUrl": "https://thumbs.dreamstime.com/b/one-continuous-line-drawing-young-male-doctor-giving-consultation-session-to-female-patient-reading-medical-record-one-190965697.jpg?w=768",
+      "imageHint": "doctor patient drawing"
+    },
+    {
+      "id": "home-hero-bg",
+      "description": "A nurse holding a senior patient's hand.",
+      "imageUrl": "https://media.istockphoto.com/id/1437830105/photo/cropped-shot-of-a-female-nurse-hold-her-senior-patients-hand-giving-support-doctor-helping.jpg?s=612x612&w=0&k=20&c=oKR-00at4oXr4tY5IxzqsswaLaaPsPRkdw2MJbYHWgA=",
+      "imageHint": "nurse patient hand"
     },
     {
       "id": "hospital-illustration",
@@ -26,27 +32,27 @@
     },
     {
       "id": "expert-avatar-1",
-      "description": "3D cartoon avatar of a smiling woman.",
-      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
-      "imageHint": "3d woman avatar"
+      "description": "Silhouette of a medical professional",
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     },
     {
       "id": "expert-avatar-2",
-      "description": "3D cartoon avatar of a smiling woman.",
-      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
-      "imageHint": "3d woman avatar"
+      "description": "Silhouette of a medical professional",
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     },
     {
       "id": "expert-avatar-3",
-      "description": "3D cartoon avatar of a smiling woman.",
-      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
-      "imageHint": "3d woman avatar"
+      "description": "Silhouette of a medical professional",
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     },
     {
       "id": "expert-avatar-4",
-      "description": "3D cartoon avatar of a smiling woman.",
-      "imageUrl": "https://media.istockphoto.com/id/1413524220/vector/3d-cartoon-avatar-of-smiling-woman.jpg?s=612x612&w=0&k=20&c=225R5iIFa3-iicwx3x3Jo1Wq-pYl06Oo1qYh2N1i8gE=",
-      "imageHint": "3d woman avatar"
+      "description": "Silhouette of a medical professional",
+      "imageUrl": "https://www.kindpng.com/picc/m/64-649608_silhouette-of-a-nurse-doctor-clipart-black-and.png",
+      "imageHint": "doctor silhouette"
     },
     {
       "id": "blog-1",

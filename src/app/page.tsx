@@ -34,6 +34,7 @@ export default function Home() {
   ];
   
   const heroBanner = placeholderImages.find(p => p.id === 'home-hero');
+  const heroBg = placeholderImages.find(p => p.id === 'home-hero-bg');
 
   const blogs = [
     {
@@ -51,30 +52,43 @@ export default function Home() {
       snippet: "What to expect and how to prepare for a routine medical visit.",
       image: placeholderImages.find(p => p.id === 'blog-3'),
     },
-  ]
+  ];
 
   return (
     <div className="flex flex-col space-y-12">
-      {heroBanner && (
-        <Card className="border-none bg-transparent shadow-none">
-            <CardContent className="flex flex-col items-center gap-8 p-0 text-center md:flex-row md:text-left">
-              <div className="flex-1">
-                  <h2 className="text-4xl font-bold text-foreground font-headline lg:text-5xl">
-                    Find the right care, faster
-                  </h2>
-                  <p className="mt-4 text-muted-foreground lg:text-lg">We’ll guide you through every step of your healthcare journey.</p>
-              </div>
-              <Image
-                  src={heroBanner.imageUrl}
-                  alt={heroBanner.description}
-                  width={400}
-                  height={400}
-                  className="w-64 flex-shrink-0 object-contain md:w-80"
-                  data-ai-hint={heroBanner.imageHint}
-              />
-            </CardContent>
-        </Card>
-      )}
+      <div className="relative overflow-hidden rounded-3xl">
+        {heroBg && (
+          <Image
+            src={heroBg.imageUrl}
+            alt={heroBg.description}
+            fill
+            className="object-cover opacity-20"
+            data-ai-hint={heroBg.imageHint}
+          />
+        )}
+        <div className="relative">
+          {heroBanner && (
+            <Card className="m-6 border-none bg-transparent shadow-none">
+                <CardContent className="flex flex-col items-center gap-8 p-0 text-center md:flex-row md:text-left">
+                  <div className="flex-1">
+                      <h2 className="text-4xl font-bold text-foreground font-headline lg:text-5xl">
+                        Find the right care, faster
+                      </h2>
+                      <p className="mt-4 text-muted-foreground lg:text-lg">We’ll guide you through every step of your healthcare journey.</p>
+                  </div>
+                  <Image
+                      src={heroBanner.imageUrl}
+                      alt={heroBanner.description}
+                      width={400}
+                      height={400}
+                      className="w-64 flex-shrink-0 rounded-lg object-contain md:w-80"
+                      data-ai-hint={heroBanner.imageHint}
+                  />
+                </CardContent>
+            </Card>
+          )}
+        </div>
+      </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
         {actions.map(action => (
