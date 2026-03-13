@@ -38,20 +38,22 @@ export default function Home() {
   return (
     <div className="flex flex-col space-y-6">
       {heroBanner && (
-        <Card className="overflow-hidden border-none bg-primary/10 text-center shadow-none">
-          <CardContent className="p-6">
+        <Card className="overflow-hidden border-none bg-primary/10 shadow-none">
+          <CardContent className="flex flex-col items-center p-6 text-center md:flex-row md:p-8 md:text-left">
             <Image
                 src={heroBanner.imageUrl}
                 alt={heroBanner.description}
                 width={300}
                 height={200}
-                className="mx-auto w-48 object-contain"
+                className="w-48 object-contain md:w-56"
                 data-ai-hint={heroBanner.imageHint}
             />
-            <h2 className="mt-4 text-2xl font-bold text-primary font-headline">
-              Find the right care, faster
-            </h2>
-            <p className="text-muted-foreground">We’ll guide you through every step.</p>
+            <div className="mt-4 md:mt-0 md:ml-8">
+                <h2 className="text-2xl font-bold text-primary font-headline lg:text-3xl">
+                  Find the right care, faster
+                </h2>
+                <p className="mt-2 text-muted-foreground lg:text-lg">We’ll guide you through every step.</p>
+            </div>
           </CardContent>
         </Card>
       )}
