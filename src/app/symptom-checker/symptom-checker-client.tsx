@@ -93,8 +93,6 @@ export default function SymptomCheckerClient({
         'The AI model could not provide an analysis. Please try again with more details.'
       );
       setStep('triageForm');
-    } finally {
-      //
     }
   };
 
@@ -155,8 +153,8 @@ const ScreenHeader = ({
   description?: string;
 }) => {
   return (
-  <header className="text-center space-y-4">
-    <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
+  <header className="text-center space-y-2">
+    <h1 className="text-2xl font-bold tracking-tight text-primary font-headline">
       {title}
     </h1>
     {description && (
@@ -186,7 +184,7 @@ const StartScreen = ({ onStart }: { onStart: () => void }) => (
       <Button size="lg" className="w-full max-w-xs" onClick={onStart}>
         Start Health Check
       </Button>
-      <p className="text-sm text-muted-foreground mt-2">Takes about 1 minute.</p>
+      <p className="text-sm text-muted-foreground mt-2">Takes about 2 minutes.</p>
     </div>
   </div>
 );
@@ -206,9 +204,9 @@ const EmergencyCheckScreen = ({
         {emergencySymptoms.map((symptom) => (
           <div
             key={symptom}
-            className="flex items-center space-x-3 p-3 bg-destructive text-destructive-foreground rounded-lg"
+            className="flex items-center space-x-3 p-3 bg-destructive/10 text-destructive rounded-lg"
           >
-            <AlertTriangle className="h-5 w-5 text-destructive-foreground flex-shrink-0" />
+            <AlertTriangle className="h-5 w-5 flex-shrink-0" />
             <span className="font-medium">{symptom}</span>
           </div>
         ))}
@@ -282,17 +280,7 @@ const TriageForm = ({
   };
 
   return (
-    <div className="space-y-4">
-      <div className="space-y-2">
-        <div className="flex justify-between text-sm font-medium text-muted-foreground">
-          <span>Triage Questions</span>
-          <span>
-            Step {formStep} of {TOTAL_FORM_STEPS}
-          </span>
-        </div>
-        <Progress value={(formStep / TOTAL_FORM_STEPS) * 100} />
-      </div>
-
+    <div className="space-y-6">
       {renderFormStep()}
 
       {error && (
@@ -303,13 +291,13 @@ const TriageForm = ({
         </Alert>
       )}
 
-      {formStep > 1 && (
-        <div className="flex justify-between items-center pt-4">
-          <Button variant="outline" onClick={prevStep} disabled={formStep === 1}>
-            <ArrowLeft className="mr-2 h-4 w-4" /> Previous
+      {formStep > 0 && (
+         <div className="flex justify-between items-center pt-4">
+          <Button variant="outline" onClick={formStep === 1 ? () => window.location.reload() : prevStep}>
+            <ArrowLeft className="mr-2 h-4 w-4" /> {formStep === 1 ? 'Cancel' : 'Previous'}
           </Button>
           {formStep < TOTAL_FORM_STEPS ? (
-            <Button onClick={nextStep}>
+            <Button onClick={nextStep} size="lg">
               Next <ChevronRight className="ml-2 h-4 w-4" />
             </Button>
           ) : (
@@ -331,10 +319,12 @@ const FormQuestion = ({
   title: string;
   children: React.ReactNode;
 }) => (
-  <div className="space-y-2 rounded-lg border bg-card p-4">
-    <Label className="font-semibold text-base">{title}</Label>
-    <div className="pt-2">{children}</div>
-  </div>
+  <Card className="shadow-sm">
+    <CardContent className="p-5">
+      <Label className="font-semibold text-base">{title}</Label>
+      <div className="pt-4">{children}</div>
+    </CardContent>
+  </Card>
 );
 
 const RadioQuestion = ({
@@ -349,15 +339,13 @@ const RadioQuestion = ({
   <RadioGroup
     value={value}
     onValueChange={onValueChange}
-    className="flex flex-wrap gap-x-4 gap-y-2"
+    className="grid grid-cols-2 gap-3"
   >
     {options.map((opt) => (
-      <div key={opt} className="flex items-center space-x-2">
+      <Label key={opt} htmlFor={opt.replace(/\s+/g, '')} className="flex items-center space-x-2 rounded-lg border p-3 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all">
         <RadioGroupItem value={opt} id={opt.replace(/\s+/g, '')} />
-        <Label htmlFor={opt.replace(/\s+/g, '')} className="font-normal cursor-pointer">
-          {opt}
-        </Label>
-      </div>
+        <span className="font-normal">{opt}</span>
+      </Label>
     ))}
   </RadioGroup>
 );
@@ -371,18 +359,16 @@ const CheckboxQuestion = ({
   onValueChange: (v: string) => void;
   options: string[];
 }) => (
-  <div className="space-y-3">
+  <div className="grid grid-cols-2 gap-3">
     {options.map((opt) => (
-      <div key={opt} className="flex items-center space-x-3">
+      <Label key={opt} htmlFor={opt.replace(/\s+/g, '')} className="flex items-center space-x-2 rounded-lg border p-3 cursor-pointer has-[:checked]:bg-primary/10 has-[:checked]:border-primary transition-all">
         <Checkbox
           id={opt.replace(/\s+/g, '')}
           checked={value.includes(opt)}
           onCheckedChange={() => onValueChange(opt)}
         />
-        <Label htmlFor={opt.replace(/\s+/g, '')} className="font-normal cursor-pointer">
-          {opt}
-        </Label>
-      </div>
+        <span className="font-normal">{opt}</span>
+      </Label>
     ))}
   </div>
 );
@@ -409,7 +395,7 @@ const FormStep1 = ({ updateAnswer, nextStep }: any) => {
         <FormQuestion title="What’s bothering you today?">
              <div className="grid grid-cols-2 gap-3 pt-2">
                 {symptomCategories.map(({name, icon: Icon, concern}) => (
-                    <button key={name} onClick={() => handleSelectCategory(concern)} className="flex flex-col items-center justify-center space-y-2 p-4 border rounded-lg hover:bg-accent/50 hover:border-primary/50 transition-colors text-center">
+                    <button key={name} onClick={() => handleSelectCategory(concern)} className="flex flex-col items-center justify-center space-y-2 p-4 border rounded-lg hover:bg-primary/5 hover:border-primary transition-colors text-center h-28">
                         <Icon className="h-8 w-8 text-primary" />
                         <span className="text-sm font-medium">{name}</span>
                     </button>
@@ -420,7 +406,7 @@ const FormStep1 = ({ updateAnswer, nextStep }: any) => {
 }
 
 const FormStep2 = ({ answers, updateAnswer }: any) => (
-  <div className="space-y-4">
+  <div className="space-y-6">
     <FormQuestion title="How severe are your symptoms?">
       <RadioQuestion
         value={answers.symptomSeverity}
@@ -451,7 +437,7 @@ const FormStep2 = ({ answers, updateAnswer }: any) => (
           step={1}
         />
         <span className="font-bold text-lg text-primary w-8 text-center">
-          {answers.painScale ?? 10}
+          {answers.painScale ?? 0}
         </span>
       </div>
     </FormQuestion>
@@ -459,7 +445,7 @@ const FormStep2 = ({ answers, updateAnswer }: any) => (
 );
 
 const FormStep3 = ({ answers, updateAnswer }: any) => (
-  <div className="space-y-4">
+  <div className="space-y-6">
     <FormQuestion title="Are your symptoms getting worse?">
       <RadioQuestion
         value={answers.symptomProgression}
@@ -486,13 +472,6 @@ const FormStep3 = ({ answers, updateAnswer }: any) => (
         options={['No', 'Yes']}
       />
     </FormQuestion>
-    <FormQuestion title="Are you experiencing uncontrolled bleeding?">
-      <RadioQuestion
-        value={answers.bleedingCheck}
-        onValueChange={(v) => updateAnswer('bleedingCheck', v)}
-        options={['No', 'Yes']}
-      />
-    </FormQuestion>
      <FormQuestion title="Do you currently have a fever?">
       <RadioQuestion
         value={answers.feverCheck}
@@ -513,7 +492,7 @@ const FormStep4 = ({ answers, updateAnswer }: any) => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <FormQuestion title="Are you experiencing any of these infection symptoms?">
         <CheckboxQuestion
           value={answers.infectionSymptoms as string[]}
@@ -535,13 +514,6 @@ const FormStep4 = ({ answers, updateAnswer }: any) => {
           options={['Chest pressure', 'Pain spreading to arm', 'Sweating', 'Nausea', 'None']}
         />
       </FormQuestion>
-      <FormQuestion title="Are you experiencing any signs of a severe allergic reaction?">
-        <CheckboxQuestion
-            value={answers.allergicReactionCheck as string[]}
-            onValueChange={(v) => handleMultiSelect('allergicReactionCheck', v)}
-            options={['Facial swelling', 'Throat swelling', 'Difficulty breathing', 'Rash', 'None']}
-        />
-      </FormQuestion>
     </div>
   );
 };
@@ -555,7 +527,7 @@ const FormStep5 = ({ answers, updateAnswer }: any) => {
     updateAnswer(key, newValues);
   };
   return (
-    <div className="space-y-4">
+    <div className="space-y-6">
       <FormQuestion title="Did this happen after an accident or injury?">
         <RadioQuestion
           value={answers.injuryContext}
@@ -577,19 +549,12 @@ const FormStep5 = ({ answers, updateAnswer }: any) => {
           options={['Heart disease', 'Diabetes', 'Asthma', 'Hypertension', 'None']}
         />
       </FormQuestion>
-      <FormQuestion title="For women: are you currently pregnant?">
-        <RadioQuestion
-          value={answers.pregnancyStatus}
-          onValueChange={(v) => updateAnswer('pregnancyStatus', v)}
-          options={['Yes', 'No', 'Not sure / Not applicable']}
-        />
-      </FormQuestion>
     </div>
   );
 };
 
 const FormStep6 = ({ answers, updateAnswer }: any) => (
-  <div className="space-y-4">
+  <div className="space-y-6">
     <FormQuestion title="Are you able to continue daily activities?">
       <RadioQuestion
         value={answers.functionalImpact}
@@ -604,14 +569,7 @@ const FormStep6 = ({ answers, updateAnswer }: any) => (
         options={['Yes', 'Limited movement', 'Cannot move']}
       />
     </FormQuestion>
-    <FormQuestion title="Is this the first time this symptom has occurred?">
-      <RadioQuestion
-        value={answers.symptomFrequency}
-        onValueChange={(v) => updateAnswer('symptomFrequency', v)}
-        options={['Yes, it is the first time', 'No, it has happened before', 'It happens often']}
-      />
-    </FormQuestion>
-    <FormQuestion title="Do you feel your condition is serious or life-threatening?">
+    <FormQuestion title="Do you feel your condition is serious?">
       <RadioQuestion
         value={answers.finalConcern}
         onValueChange={(v) => updateAnswer('finalConcern', v)}
@@ -627,7 +585,7 @@ const LoadingScreen = () => (
     <Loader2 className="h-12 w-12 animate-spin text-primary" />
     <h2 className="text-xl font-semibold">Analyzing your symptoms...</h2>
     <p className="text-muted-foreground max-w-xs">
-      Our AI is determining the best course of action.
+      Our AI is determining the best course of action. This may take a moment.
     </p>
   </div>
 );

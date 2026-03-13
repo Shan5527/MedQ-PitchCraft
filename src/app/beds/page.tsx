@@ -1,7 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { BedDouble, Bed, AlertTriangle } from 'lucide-react';
+import { BedDouble, Bed, AlertTriangle, Hospital as HospitalIcon } from 'lucide-react';
+import Image from 'next/image';
+import { placeholderImages } from '@/lib/placeholder-images';
 
 type Hospital = {
     name: string;
@@ -37,22 +39,41 @@ const hospitals: Hospital[] = [
 ];
 
 export default function BedFinderPage() {
+    const hospitalIllustration = placeholderImages.find(p => p.id === 'hospital-illustration');
+
     return (
         <div className="flex flex-col space-y-6">
-            <header className="text-center space-y-4">
-                <h1 className="text-3xl font-bold tracking-tight text-primary font-headline">
+            <Card className="border-none bg-primary/10 text-center shadow-none">
+              <CardContent className="p-6">
+                 {hospitalIllustration && (
+                    <Image
+                        src={hospitalIllustration.imageUrl}
+                        alt={hospitalIllustration.description}
+                        width={300}
+                        height={200}
+                        className="mx-auto w-32 object-contain"
+                        data-ai-hint={hospitalIllustration.imageHint}
+                    />
+                )}
+                <h1 className="mt-2 text-2xl font-bold tracking-tight text-primary font-headline">
                     Available Beds Nearby
                 </h1>
                 <p className="text-muted-foreground">
                     Real-time bed availability in your area.
                 </p>
-            </header>
+              </CardContent>
+            </Card>
 
             <div className="space-y-4">
                 {hospitals.map((hospital) => (
-                    <Card key={hospital.name} className="shadow-md">
-                        <CardHeader className="flex-row items-center justify-between space-y-0 pb-2">
-                            <CardTitle className="text-lg">{hospital.name}</CardTitle>
+                    <Card key={hospital.name} className="shadow-sm">
+                        <CardHeader className="flex-row items-start justify-between space-y-0 pb-2">
+                            <div>
+                               <CardTitle className="text-lg flex items-center gap-2">
+                                <HospitalIcon className="h-5 w-5 text-primary" />
+                                {hospital.name}
+                               </CardTitle>
+                            </div>
                              <Badge variant={hospital.status === 'Available' ? 'success' : 'warning'}>
                                 {hospital.status === 'Available' ? 
                                     <Bed className="mr-2 h-3 w-3" /> :

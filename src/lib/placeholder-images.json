@@ -1,34 +1,22 @@
 {
   "placeholderImages": [
     {
-      "id": "medicine",
-      "description": "A collection of pills and a medicine bottle.",
-      "imageUrl": "https://picsum.photos/seed/medicine/200/200",
-      "imageHint": "medicine pills"
+      "id": "home-hero",
+      "description": "A friendly doctor assisting a patient using a tablet.",
+      "imageUrl": "https://picsum.photos/seed/homehero/300/200",
+      "imageHint": "doctor patient"
     },
     {
-      "id": "lab-tests",
-      "description": "A gloved hand holding a lab test tube.",
-      "imageUrl": "https://picsum.photos/seed/labtest/200/200",
-      "imageHint": "lab test"
+      "id": "hospital-illustration",
+      "description": "An illustration of a hospital building.",
+      "imageUrl": "https://picsum.photos/seed/hospital/300/200",
+      "imageHint": "hospital building"
     },
     {
-      "id": "doctor-consult",
-      "description": "An illustration of a friendly doctor.",
-      "imageUrl": "https://picsum.photos/seed/doctor/200/200",
-      "imageHint": "doctor illustration"
-    },
-    {
-      "id": "branded-substitute",
-      "description": "An illustration of a pill with a rupee symbol.",
-      "imageUrl": "https://picsum.photos/seed/substitute/200/200",
-      "imageHint": "pill money"
-    },
-    {
-      "id": "promo-banner",
-      "description": "A promotional banner showing doctors available for consultation.",
-      "imageUrl": "https://picsum.photos/seed/promobanner/800/400",
-      "imageHint": "doctors team"
+      "id": "user-avatar",
+      "description": "A placeholder avatar for a user profile.",
+      "imageUrl": "https://picsum.photos/seed/useravatar/100/100",
+      "imageHint": "person avatar"
     }
   ]
 }
