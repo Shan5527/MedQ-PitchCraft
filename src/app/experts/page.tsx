@@ -103,7 +103,7 @@ export default function ExpertListPage() {
                             <CardContent className="p-4 flex items-center gap-4">
                                 {avatar && (
                                     <Avatar className="h-20 w-20 border-2 border-primary/20">
-                                        <AvatarImage src={avatar.imageUrl} alt={expert.name} />
+                                        <AvatarImage src={avatar.imageUrl} alt={expert.name} className="opacity-30" />
                                         <AvatarFallback>{expert.name.charAt(0)}</AvatarFallback>
                                     </Avatar>
                                 )}

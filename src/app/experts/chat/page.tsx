@@ -50,7 +50,7 @@ export default function ChatPage() {
                     </Button>
                     {expertAvatar && (
                          <Avatar className="h-10 w-10">
-                            <AvatarImage src={expertAvatar.imageUrl} alt="Dr. Priya Sharma" />
+                            <AvatarImage src={expertAvatar.imageUrl} alt="Dr. Priya Sharma" className="opacity-30" />
                             <AvatarFallback>PS</AvatarFallback>
                         </Avatar>
                     )}
@@ -70,7 +70,7 @@ export default function ChatPage() {
                     <div key={msg.id} className={`flex items-end gap-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
                         {msg.sender === 'expert' && expertAvatar && (
                              <Avatar className="h-8 w-8">
-                                <AvatarImage src={expertAvatar.imageUrl} />
+                                <AvatarImage src={expertAvatar.imageUrl} className="opacity-30" />
                                 <AvatarFallback>PS</AvatarFallback>
                             </Avatar>
                         )}
