@@ -72,7 +72,9 @@ Analyze the combination of structured symptom tags and the patient's free-text d
 
 Patient's reported information:
 Symptom Tags: {{{symptoms}}}
+{{#if symptomsDescription}}
 Symptom Description: {{{symptomsDescription}}}
+{{/if}}
 Duration: {{{duration}}}
 Severity: {{{severity}}}
 
