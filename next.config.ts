@@ -26,6 +26,18 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'www.kindpng.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'healthokglobal.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'media.licdn.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'encrypted-tbn0.gstatic.com',
+      },
     ],
   },
 };

@@ -56,21 +56,21 @@
     },
     {
       "id": "blog-1",
-      "description": "A senior man having a check-up at the doctor's office.",
-      "imageUrl": "https://media.istockphoto.com/id/1418223405/photo/senior-man-having-a-check-up-at-the-doctors-office.jpg?s=612x612&w=0&k=20&c=t1y-iFBc_y9EVqRSDRyDk0YmQW01xLz4aWwS7X-yVb0=",
+      "description": "Doctor discussing with a senior patient.",
+      "imageUrl": "https://healthokglobal.com/assets/images/blogs/navigating-senior-health-care-the-role-of-home-doc.webp",
       "imageHint": "senior doctor checkup"
     },
     {
       "id": "blog-2",
       "description": "A female doctor visiting a patient at home.",
-      "imageUrl": "https://media.istockphoto.com/id/1399335803/photo/a-female-doctor-is-visiting-a-patient-at-home.jpg?s=612x612&w=0&k=20&c=qXl8Q52W2sXG4sDqd_fPZgI3b23zN2f-M2v0cGuU8kQ=",
+      "imageUrl": "https://media.licdn.com/dms/image/v2/D5612AQHI1PFi6mjvOw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1737702271581?e=2147483647&v=beta&t=_shWaCTFiQ9wt-OrqGYeQn-F22ZT0q-LRoQFQrPoMII",
       "imageHint": "doctor home visit"
     },
     {
       "id": "blog-3",
-      "description": "A beautiful female doctor looking at the camera in her office.",
-      "imageUrl": "https://media.istockphoto.com/id/1325423161/photo/beautiful-female-doctor-looking-at-camera-in-the-office.jpg?s=612x612&w=0&k=20&c=g-wPjybXm-L-d8_fL5XvM2fChyqgttOadY5n_5hYj2Y=",
-      "imageHint": "female doctor"
+      "description": "Doctor checking patient's blood pressure.",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgLs3ADjLZHNu4LmM9X5bVaNtffnRPXq7oUw&s",
+      "imageHint": "doctor checkup"
     }
   ]
 }
