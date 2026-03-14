@@ -59,7 +59,7 @@ export default function AppHeader() {
 
       {/* Desktop Navigation Bar */}
       <nav className="hidden md:block bg-primary/95 border-t border-primary-foreground/10">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-start px-4 h-12">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-end px-4 h-12">
             <div className="flex items-center gap-8 text-sm font-medium text-primary-foreground">
                 {navItems.map((item) => {
                     const isActive = (pathname === '/' && item.href === '/') || 
@@ -69,7 +69,7 @@ export default function AppHeader() {
                         href={item.href} 
                         key={item.label}
                         className={cn(
-                        "transition-colors hover:text-white py-2",
+                        "transition-colors hover:text-white py-2 text-sm",
                         isActive ? "text-white font-semibold border-b-2 border-white" : "text-white/70"
                         )}
                     >
