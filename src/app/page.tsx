@@ -62,7 +62,7 @@ export default function Home() {
             src={heroBg.imageUrl}
             alt={heroBg.description}
             fill
-            className="object-cover opacity-20 scale-110"
+            className="object-cover opacity-25 scale-110"
             data-ai-hint={heroBg.imageHint}
           />
         )}
