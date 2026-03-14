@@ -1,3 +1,6 @@
+'use client';
+
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Stethoscope, BedDouble, FileText, Users, ChevronRight } from 'lucide-react';
@@ -5,8 +8,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { placeholderImages } from '@/lib/placeholder-images';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import Autoplay from 'embla-carousel-autoplay';
 
 export default function Home() {
+  const plugin = React.useRef(
+    Autoplay({ delay: 3000, stopOnInteraction: true })
+  );
+
   const actions = [
     {
       label: 'Symptom Check',
@@ -134,10 +142,14 @@ export default function Home() {
        <div id="blogs" className="space-y-6 scroll-mt-20">
         <h2 className="text-3xl font-bold text-foreground font-headline px-1">Recent Blogs</h2>
          <Carousel
+          plugins={[plugin.current]}
           opts={{
             align: "start",
+            loop: true,
           }}
           className="w-full"
+          onMouseEnter={plugin.current.stop}
+          onMouseLeave={plugin.current.reset}
         >
           <CarouselContent>
             {blogs.map((blog, index) => blog.image && (
