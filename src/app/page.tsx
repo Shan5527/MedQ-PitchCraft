@@ -12,7 +12,7 @@ import Autoplay from 'embla-carousel-autoplay';
 
 export default function Home() {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true })
+    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
   );
 
   const actions = [
@@ -148,8 +148,6 @@ export default function Home() {
             loop: true,
           }}
           className="w-full"
-          onMouseEnter={plugin.current.stop}
-          onMouseLeave={plugin.current.reset}
         >
           <CarouselContent>
             {blogs.map((blog, index) => blog.image && (
