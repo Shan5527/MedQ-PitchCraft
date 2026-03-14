@@ -11,8 +11,9 @@ const navItems = [
   { href: '/symptom-checker', label: 'Symptom Check' },
   { href: '/beds', label: 'Bed Finder' },
   { href: '/experts', label: 'Experts' },
-  { href: '/queue/token', label: 'Queue' },
-  { href: '/billing', label: 'Billing' },
+  { href: '/blog', label: 'Blogs' },
+  { href: '/faq', label: 'FAQ' },
+  { href: '/about', label: 'About' },
 ];
 
 export default function AppHeader() {

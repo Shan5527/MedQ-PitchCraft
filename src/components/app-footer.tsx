@@ -39,16 +39,19 @@ export default function AppFooter() {
                                 <li>
                                     <Link href="/experts" className="hover:underline">Talk to an Expert</Link>
                                 </li>
+                                 <li>
+                                    <Link href="/faq" className="hover:underline">FAQ</Link>
+                                </li>
                             </ul>
                         </div>
                         <div>
                             <h2 className="mb-6 text-sm font-semibold uppercase">Company</h2>
                             <ul className="space-y-4">
                                 <li>
-                                    <Link href="#" className="hover:underline">About Us</Link>
+                                    <Link href="/about" className="hover:underline">About Us</Link>
                                 </li>
                                 <li>
-                                    <Link href="/#blogs" className="hover:underline">Blog</Link>
+                                    <Link href="/blog" className="hover:underline">Blog</Link>
                                 </li>
                                 <li>
                                     <Link href="#" className="hover:underline">Contact</Link>
