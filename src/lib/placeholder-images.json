@@ -74,21 +74,21 @@
     },
     {
       "id": "blog-4",
-      "description": "A psychologist counseling a patient.",
-      "imageUrl": "https://media.istockphoto.com/id/1357262242/photo/mental-health-and-psychology-concept-counseling-or-therapy-session-in-office-unrecognizable.jpg?s=612x612&w=0&k=20&c=p2P3zzywWw0oTfLw-IodHkxy2caT5_GN_O3Pf2k3sMw=",
-      "imageHint": "mental health support"
+      "description": "Abstract image of a head with gears for mental health.",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShw7v0_JuyvBmmx2KsRrkoul1K0bZV7RZ-aA&s",
+      "imageHint": "mental health abstract"
     },
     {
       "id": "blog-5",
-      "description": "A table full of healthy food.",
-      "imageUrl": "https://media.istockphoto.com/id/1329938637/photo/healthy-eating-healthy-food-on-table-at-home.jpg?s=612x612&w=0&k=20&c=qYw-0s_vF3nC5I-l_TMDJ-JFLn8IMp-7V27J3L620Xg=",
-      "imageHint": "healthy food diet"
+      "description": "A colorful array of healthy fruits and vegetables.",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOUkuX2vBv1BgX-Aceo3TaHdqnxUDnE0AtdA&s",
+      "imageHint": "healthy food"
     },
     {
       "id": "blog-6",
-      "description": "A female doctor examining a young girl with a stethoscope.",
-      "imageUrl": "https://media.istockphoto.com/id/1393132348/photo/shot-of-a-doctor-examining-a-little-girl-in-a-clinic.jpg?s=612x612&w=0&k=20&c=M_Hcv-j2LhbA-CVdC4A6gA-LhQ1-QYpQJ-c-Fkv916U=",
-      "imageHint": "pediatrician child checkup"
+      "description": "A pediatrician listening to a child's heartbeat.",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSV1SngGhSqVvhIdFuRXSV73w3stWt8uYw8fw&s",
+      "imageHint": "pediatrician checkup"
     }
   ]
 }
