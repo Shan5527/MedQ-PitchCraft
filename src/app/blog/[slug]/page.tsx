@@ -3,6 +3,49 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 import { Card } from '@/components/ui/card';
 import { CalendarDays, UserCircle } from 'lucide-react';
+import { type Metadata } from 'next';
+
+type Props = {
+  params: { slug: string };
+};
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const blog = blogs.find((blog) => blog.slug === params.slug);
+
+  if (!blog) {
+    return {
+      title: 'Blog Post Not Found',
+      description: 'The blog post you are looking for does not exist.',
+    };
+  }
+  
+  const imageUrl = blog.image?.imageUrl;
+
+  return {
+    title: `${blog.title} | MedQ`,
+    description: blog.snippet,
+    openGraph: {
+      title: `${blog.title} | MedQ`,
+      description: blog.snippet,
+      images: imageUrl ? [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: blog.title,
+        },
+      ] : [],
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${blog.title} | MedQ`,
+      description: blog.snippet,
+      images: imageUrl ? [imageUrl] : [],
+    },
+  };
+}
+
 
 export async function generateStaticParams() {
   return blogs.map((blog) => ({
@@ -53,7 +96,7 @@ export default function BlogPostPage({ params }: { params: { slug:string } }) {
         </Card>
       )}
 
-      <article className="space-y-6">
+      <article className="prose prose-lg max-w-none mx-auto space-y-6">
         {contentParts.map((part, index) => {
            if (part.startsWith('**') && part.endsWith('**')) {
              return <h2 key={index} className="text-3xl font-bold mt-8 mb-4 font-headline text-foreground">{part.replaceAll('**', '')}</h2>
