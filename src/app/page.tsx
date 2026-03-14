@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Stethoscope, BedDouble, FileText, Users } from 'lucide-react';
+import { Stethoscope, BedDouble, FileText, Users, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { placeholderImages } from '@/lib/placeholder-images';
@@ -91,18 +91,25 @@ export default function Home() {
       </div>
 
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-        {actions.map(action => (
-          <Link href={action.href} key={action.label}>
-            <Card className="h-full transition-all hover:border-primary hover:bg-primary/5 hover:-translate-y-1">
-                <CardHeader>
-                    <div className="mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary">
-                        <action.icon className="h-6 w-6" />
-                    </div>
-                    <CardTitle className="text-lg">{action.label}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                    <p className="text-sm text-muted-foreground">{action.description}</p>
-                </CardContent>
+        {actions.map((action) => (
+          <Link href={action.href} key={action.label} className="group block h-full">
+            <Card className="h-full transition-all duration-300 group-hover:border-primary group-hover:bg-primary/5 group-hover:-translate-y-2 group-hover:shadow-xl">
+              <CardContent className="flex h-full flex-col p-6">
+                <div className="mb-4 flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-300 group-hover:scale-105 group-hover:bg-primary group-hover:text-primary-foreground">
+                  <action.icon className="h-8 w-8" />
+                </div>
+                <div className="flex-grow">
+                  <CardTitle className="text-xl font-bold">
+                    {action.label}
+                  </CardTitle>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {action.description}
+                  </p>
+                </div>
+                <div className="mt-4 flex items-center font-semibold text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+                  Explore <ChevronRight className="ml-1 h-4 w-4" />
+                </div>
+              </CardContent>
             </Card>
           </Link>
         ))}
