@@ -20,67 +20,74 @@ export default function AppHeader() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b bg-primary">
-      <div className="mx-auto flex h-20 w-full max-w-5xl items-center justify-between px-4">
-        <div className="bg-white rounded-lg p-2">
-           {logo && (
-            <Link href="/" className="flex items-center gap-3">
-              <div className="relative h-12 w-12">
-                <Image
+    <header className="sticky top-0 z-40 w-full shadow-md">
+      {/* Top bar with logo */}
+      <div className="bg-primary">
+        <div className="mx-auto flex h-20 w-full max-w-5xl items-center justify-between px-4">
+            <div className="bg-white rounded-lg p-2">
+            {logo && (
+                <Link href="/" className="flex items-center gap-3">
+                <div className="relative h-12 w-12">
+                    <Image
                     src={logo.imageUrl}
                     alt="MedQ Logo"
                     fill
                     className="object-contain"
                     priority
                     data-ai-hint={logo.imageHint}
-                />
-              </div>
-              <div>
-                <h1 className="text-4xl font-bold font-headline text-foreground">
-                  Med<span className="text-destructive">Q</span>
-                </h1>
-              </div>
-            </Link>
-           )}
-        </div>
-        
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6 text-base font-medium text-primary-foreground">
-          {navItems.map((item) => {
-            const isActive = (pathname === '/' && item.href === '/') || 
-                             (item.href !== '/' && pathname.startsWith(item.href));
-            return (
-              <Link 
-                href={item.href} 
-                key={item.label}
-                className={cn(
-                  "transition-colors hover:text-white/90",
-                  isActive ? "text-white" : "text-white/70"
-                )}
-              >
-                {item.label}
-              </Link>
-            )
-          })}
-           <Link href="/profile" className="ml-4">
-              <div className={cn(
-                  "flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors",
-                  pathname.startsWith('/profile') && 'bg-primary-foreground/40 ring-2 ring-white'
-                )}>
-                <User className="h-6 w-6 text-primary-foreground" />
-              </div>
-          </Link>
-        </nav>
-
-        {/* Mobile: Show profile icon as the main nav is at the bottom */}
-        <div className="md:hidden">
-            <Link href="/profile">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20">
-                <User className="h-6 w-6 text-primary-foreground" />
-              </div>
-            </Link>
+                    />
+                </div>
+                <div>
+                    <h1 className="text-4xl font-bold font-headline text-foreground">
+                    Med<span className="text-destructive">Q</span>
+                    </h1>
+                </div>
+                </Link>
+            )}
+            </div>
+            
+            {/* Mobile: Show profile icon as the main nav is at the bottom */}
+            <div className="md:hidden">
+                <Link href="/profile">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20">
+                    <User className="h-6 w-6 text-primary-foreground" />
+                </div>
+                </Link>
+            </div>
         </div>
       </div>
+
+      {/* Desktop Navigation Bar */}
+      <nav className="hidden md:block bg-primary/95 border-t border-primary-foreground/10">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 h-14">
+            <div className="flex items-center gap-8 text-base font-medium text-primary-foreground">
+                {navItems.map((item) => {
+                    const isActive = (pathname === '/' && item.href === '/') || 
+                                    (item.href !== '/' && pathname.startsWith(item.href));
+                    return (
+                    <Link 
+                        href={item.href} 
+                        key={item.label}
+                        className={cn(
+                        "transition-colors hover:text-white py-4",
+                        isActive ? "text-white font-semibold border-b-2 border-white -mb-px" : "text-white/70"
+                        )}
+                    >
+                        {item.label}
+                    </Link>
+                    )
+                })}
+            </div>
+            <Link href="/profile">
+                <div className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors",
+                    pathname.startsWith('/profile') && 'bg-primary-foreground/40 ring-2 ring-white'
+                    )}>
+                    <User className="h-6 w-6 text-primary-foreground" />
+                </div>
+            </Link>
+        </div>
+      </nav>
     </header>
   );
 }
