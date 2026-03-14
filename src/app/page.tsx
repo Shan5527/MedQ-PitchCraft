@@ -1,21 +1,64 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Stethoscope, BedDouble, FileText, Users, ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { placeholderImages } from '@/lib/placeholder-images';
-import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
+import { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
 import { blogs } from '@/lib/blog-data';
 
 export default function Home() {
   const plugin = React.useRef(
-    Autoplay({ delay: 3000, stopOnInteraction: true, stopOnMouseEnter: true })
+    // We set stopOnInteraction to false because we will handle the stop/resume logic manually.
+    Autoplay({ delay: 3000, stopOnInteraction: false, stopOnMouseEnter: true })
   );
 
+  const [api, setApi] = useState<CarouselApi>();
+
+  // This logic is based on the official embla-carousel documentation
+  // for resuming autoplay after a user interaction.
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+
+    const autoplay = api.plugins().autoplay;
+    if (!autoplay) {
+      return;
+    }
+    
+    // A timeout to resume play.
+    let resumeTimeout: ReturnType<typeof setTimeout>;
+
+    // Stop autoplay on interaction.
+    const onPointerDown = () => {
+      autoplay.stop();
+      clearTimeout(resumeTimeout);
+    };
+
+    // When the carousel settles, restart the timer to resume autoplay.
+    const onSettle = () => {
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        autoplay.play();
+      }, 5000); // 5 seconds of inactivity
+    };
+
+    api.on('pointerDown', onPointerDown);
+    api.on('settle', onSettle);
+
+    // Clean up listeners and timeout on component unmount.
+    return () => {
+      api.off('pointerDown', onPointerDown);
+      api.off('settle', onSettle);
+      clearTimeout(resumeTimeout);
+    };
+  }, [api]);
+  
   const actions = [
     {
       label: 'Symptom Check',
@@ -110,6 +153,7 @@ export default function Home() {
        <div id="blogs" className="space-y-6 scroll-mt-20">
         <h2 className="text-3xl font-bold text-foreground font-headline px-1">Recent Blogs</h2>
          <Carousel
+          setApi={setApi}
           plugins={[plugin.current]}
           opts={{
             align: "start",
