@@ -59,8 +59,8 @@ export default function AppHeader() {
 
       {/* Desktop Navigation Bar */}
       <nav className="hidden md:block bg-primary/95 border-t border-primary-foreground/10">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-center px-4 h-12">
-            <div className="flex items-center gap-8 text-base font-medium text-primary-foreground">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-start px-4 h-12">
+            <div className="flex items-center gap-8 text-sm font-medium text-primary-foreground">
                 {navItems.map((item) => {
                     const isActive = (pathname === '/' && item.href === '/') || 
                                     (item.href !== '/' && pathname.startsWith(item.href));
