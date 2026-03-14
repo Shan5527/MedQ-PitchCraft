@@ -9,6 +9,7 @@ import Image from 'next/image';
 import { placeholderImages } from '@/lib/placeholder-images';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 import Autoplay from 'embla-carousel-autoplay';
+import { blogs } from '@/lib/blog-data';
 
 export default function Home() {
   const plugin = React.useRef(
@@ -44,39 +45,6 @@ export default function Home() {
   
   const heroBanner = placeholderImages.find(p => p.id === 'home-hero');
   const heroBg = placeholderImages.find(p => p.id === 'home-hero-bg');
-
-  const blogs = [
-    {
-      title: "Navigating Senior Health",
-      snippet: "Key tips for staying healthy and active in your golden years.",
-      image: placeholderImages.find(p => p.id === 'blog-1'),
-    },
-    {
-      title: "The Rise of Home Healthcare",
-      snippet: "How personalized care at home is changing the medical landscape.",
-      image: placeholderImages.find(p => p.id === 'blog-2'),
-    },
-    {
-      title: "A Guide to Your First Check-up",
-      snippet: "What to expect and how to prepare for a routine medical visit.",
-      image: placeholderImages.find(p => p.id === 'blog-3'),
-    },
-    {
-        title: "Mental Health Matters",
-        snippet: "Breaking the stigma and finding support for your mental well-being.",
-        image: placeholderImages.find(p => p.id === 'blog-4'),
-    },
-    {
-        title: "Healthy Eating 101",
-        snippet: "Simple dietary changes for a healthier, more energetic life.",
-        image: placeholderImages.find(p => p.id === 'blog-5'),
-    },
-    {
-        title: "Your Guide to Pediatric Care",
-        snippet: "Ensuring your child gets the best start with preventative care.",
-        image: placeholderImages.find(p => p.id === 'blog-6'),
-    },
-  ];
 
   return (
     <div className="flex flex-col space-y-12">
@@ -153,27 +121,29 @@ export default function Home() {
             {blogs.map((blog, index) => blog.image && (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                  <div className="p-1 h-full">
-                    <Card key={blog.title} className="overflow-hidden flex flex-col transition-all hover:-translate-y-1 h-full">
-                    <Image 
-                        src={blog.image.imageUrl} 
-                        alt={blog.image.description}
-                        width={400}
-                        height={250}
-                        className="w-full h-48 object-cover"
-                        data-ai-hint={blog.image.imageHint}
-                    />
-                    <div className="flex flex-col flex-1">
-                        <CardHeader>
-                        <CardTitle>{blog.title}</CardTitle>
-                        </CardHeader>
-                        <CardContent className="flex-1">
-                        <p className="text-muted-foreground">{blog.snippet}</p>
-                        </CardContent>
-                        <CardFooter>
-                        <Button variant="link" className="px-0">Read More <span className="sr-only">about {blog.title}</span></Button>
-                        </CardFooter>
-                    </div>
-                    </Card>
+                    <Link href={`/blog/${blog.slug}`} className="block h-full group">
+                        <Card key={blog.title} className="overflow-hidden flex flex-col transition-all group-hover:-translate-y-1 h-full">
+                            <Image 
+                                src={blog.image.imageUrl} 
+                                alt={blog.image.description}
+                                width={400}
+                                height={250}
+                                className="w-full h-48 object-cover"
+                                data-ai-hint={blog.image.imageHint}
+                            />
+                            <div className="flex flex-col flex-1">
+                                <CardHeader>
+                                <CardTitle>{blog.title}</CardTitle>
+                                </CardHeader>
+                                <CardContent className="flex-1">
+                                <p className="text-muted-foreground">{blog.snippet}</p>
+                                </CardContent>
+                                <CardFooter>
+                                <Button variant="link" className="px-0 group-hover:underline">Read More <span className="sr-only">about {blog.title}</span></Button>
+                                </CardFooter>
+                            </div>
+                        </Card>
+                    </Link>
                  </div>
               </CarouselItem>
             ))}
