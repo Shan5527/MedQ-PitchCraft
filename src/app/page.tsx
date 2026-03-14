@@ -108,7 +108,7 @@ export default function Home() {
         ))}
       </div>
 
-       <div className="space-y-6">
+       <div id="blogs" className="space-y-6 scroll-mt-20">
         <h2 className="text-3xl font-bold text-foreground font-headline px-1">Recent Blogs</h2>
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {blogs.map(blog => blog.image && (

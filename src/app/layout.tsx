@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { Inter, Poppins } from 'next/font/google';
 import AppHeader from '@/components/app-header';
+import AppFooter from '@/components/app-footer';
 import AppNav from '@/components/app-nav';
 
 const inter = Inter({
@@ -36,6 +37,7 @@ export default function RootLayout({
           <main className="mx-auto w-full max-w-5xl flex-1 p-4">
             {children}
           </main>
+          <AppFooter />
           <AppNav />
         </div>
         <Toaster />
