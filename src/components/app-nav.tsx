@@ -14,7 +14,7 @@ export default function AppNav() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky bottom-4 z-40 w-full">
+    <nav className="sticky bottom-4 z-40 w-full md:hidden">
       <div className="mx-auto grid h-16 max-w-xs grid-cols-3 items-center rounded-full bg-card p-1 shadow-soft">
         {navItems.map((item) => {
           const isActive = (pathname === '/' && item.href === '/') || 
