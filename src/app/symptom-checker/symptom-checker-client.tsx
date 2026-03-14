@@ -420,15 +420,15 @@ const CheckboxQuestion = ({
 
 const symptomCategories = [
     { name: 'General Symptoms', icon: Thermometer, concern: 'Fever' },
-    { name: 'Respiratory', imageUrl: '/images/respiratory.png', concern: 'Breathing problem' },
+    { name: 'Respiratory', imageUrl: '/images/Respiratory.png', concern: 'Breathing problem' },
     { name: 'Cardiac', icon: Heart, concern: 'Chest pain' },
-    { name: 'Digestive', imageUrl: '/images/digestive.png', concern: 'Stomach pain' },
+    { name: 'Digestive', imageUrl: '/images/Digestive.png', concern: 'Stomach pain' },
     { name: 'Neurological', icon: Brain, concern: 'Headache' },
-    { name: 'Skin', imageUrl: '/images/skin.png', concern: 'Skin problem' },
+    { name: 'Skin', imageUrl: '/images/Skin.png', concern: 'Skin problem' },
     { name: 'Orthopedic', icon: Bone, concern: 'Joint or muscle pain' },
     { name: 'Women’s Health', icon: Venus, concern: 'Pregnancy concerns' },
     { name: 'Mental Health', icon: Smile, concern: 'Mental health concern' },
-    { name: 'Injuries', imageUrl: '/images/injury.png', concern: 'Injury' },
+    { name: 'Injuries', imageUrl: '/images/Injuries.png', concern: 'Injury' },
 ];
 
 const FormStep1 = ({ updateAnswer, nextStep, setStep }: any) => {
