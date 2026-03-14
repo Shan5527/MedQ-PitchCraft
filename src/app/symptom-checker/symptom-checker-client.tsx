@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import {
   AlertCircle,
   Clock,
@@ -10,14 +11,11 @@ import {
   ArrowLeft,
   Send,
   Thermometer,
-  Activity,
   Heart,
   Brain,
   Bone,
   Smile,
   Venus,
-  Layers,
-  Bandage,
   ChevronRight,
   Sparkles,
 } from 'lucide-react';
@@ -53,27 +51,6 @@ type Step =
   | 'emergency';
 
 const TOTAL_FORM_STEPS = 6;
-
-const DigestiveIcon = (props: React.ComponentProps<'svg'>) => (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      {...props}
-    >
-      <path d="M5.5 12.5c0-2.5 2-4.5 4.5-4.5s4.5 2 4.5 4.5c0 1.9-1.2 3.5-2.9 4.2"></path>
-      <path d="M14.5 16.5c2.5 0 4.5-2 4.5-4.5s-2-4.5-4.5-4.5"></path>
-      <path d="M5.5 12.5H2.5"></path>
-      <path d="M10 8V6"></path>
-      <path d="M14.5 8V5.5"></path>
-    </svg>
-);
 
 // Main component
 export default function SymptomCheckerClient({
@@ -442,16 +419,16 @@ const CheckboxQuestion = ({
 );
 
 const symptomCategories = [
-  { name: 'General Symptoms', icon: Thermometer, concern: 'Fever' },
-  { name: 'Respiratory', icon: Activity, concern: 'Breathing problem' },
-  { name: 'Cardiac', icon: Heart, concern: 'Chest pain' },
-  { name: 'Digestive', icon: DigestiveIcon, concern: 'Stomach pain' },
-  { name: 'Neurological', icon: Brain, concern: 'Headache' },
-  { name: 'Skin', icon: Layers, concern: 'Skin problem' },
-  { name: 'Orthopedic', icon: Bone, concern: 'Joint or muscle pain' },
-  { name: 'Women’s Health', icon: Venus, concern: 'Pregnancy concerns' },
-  { name: 'Mental Health', icon: Smile, concern: 'Mental health concern' },
-  { name: 'Injury', icon: Bandage, concern: 'Injury' },
+    { name: 'General Symptoms', icon: Thermometer, concern: 'Fever' },
+    { name: 'Respiratory', imageUrl: '/images/respiratory.svg', concern: 'Breathing problem' },
+    { name: 'Cardiac', icon: Heart, concern: 'Chest pain' },
+    { name: 'Digestive', imageUrl: '/images/digestive.svg', concern: 'Stomach pain' },
+    { name: 'Neurological', icon: Brain, concern: 'Headache' },
+    { name: 'Skin', imageUrl: '/images/skin.svg', concern: 'Skin problem' },
+    { name: 'Orthopedic', icon: Bone, concern: 'Joint or muscle pain' },
+    { name: 'Women’s Health', icon: Venus, concern: 'Pregnancy concerns' },
+    { name: 'Mental Health', icon: Smile, concern: 'Mental health concern' },
+    { name: 'Injury', imageUrl: '/images/injury.svg', concern: 'Injury' },
 ];
 
 const FormStep1 = ({ updateAnswer, nextStep, setStep }: any) => {
@@ -466,13 +443,17 @@ const FormStep1 = ({ updateAnswer, nextStep, setStep }: any) => {
   return (
     <FormQuestion title="What’s bothering you today?">
       <div className="grid grid-cols-2 gap-3 pt-2">
-        {symptomCategories.map(({ name, icon: Icon, concern }) => (
+        {symptomCategories.map(({ name, icon: Icon, concern, imageUrl }) => (
           <button
             key={name}
             onClick={() => handleSelectCategory(concern)}
             className="flex flex-col items-center justify-center space-y-2 p-4 border rounded-lg hover:bg-primary/5 hover:border-primary transition-colors text-center h-28"
           >
-            <Icon className="h-8 w-8 text-primary" />
+            {Icon ? (
+              <Icon className="h-8 w-8 text-primary" />
+            ) : (
+              imageUrl && <Image src={imageUrl} alt={name} width={32} height={32} className="h-8 w-8 object-contain" />
+            )}
             <span className="text-sm font-medium">{name}</span>
           </button>
         ))}
