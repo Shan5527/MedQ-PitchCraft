@@ -46,20 +46,20 @@ export default function AppHeader() {
             )}
             </div>
             
-            {/* Mobile: Show profile icon as the main nav is at the bottom */}
-            <div className="md:hidden">
-                <Link href="/profile">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20">
+            <Link href="/profile">
+                <div className={cn(
+                    "flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors",
+                    pathname.startsWith('/profile') && 'bg-primary-foreground/40 ring-2 ring-white'
+                    )}>
                     <User className="h-6 w-6 text-primary-foreground" />
                 </div>
-                </Link>
-            </div>
+            </Link>
         </div>
       </div>
 
       {/* Desktop Navigation Bar */}
       <nav className="hidden md:block bg-primary/95 border-t border-primary-foreground/10">
-        <div className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 h-12">
+        <div className="mx-auto flex w-full max-w-5xl items-center justify-center px-4 h-12">
             <div className="flex items-center gap-8 text-base font-medium text-primary-foreground">
                 {navItems.map((item) => {
                     const isActive = (pathname === '/' && item.href === '/') || 
@@ -78,14 +78,6 @@ export default function AppHeader() {
                     )
                 })}
             </div>
-            <Link href="/profile">
-                <div className={cn(
-                    "flex h-10 w-10 items-center justify-center rounded-full bg-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors",
-                    pathname.startsWith('/profile') && 'bg-primary-foreground/40 ring-2 ring-white'
-                    )}>
-                    <User className="h-6 w-6 text-primary-foreground" />
-                </div>
-            </Link>
         </div>
       </nav>
     </header>
