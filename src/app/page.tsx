@@ -4,6 +4,7 @@ import { Stethoscope, BedDouble, FileText, Users, ChevronRight } from 'lucide-re
 import Link from 'next/link';
 import Image from 'next/image';
 import { placeholderImages } from '@/lib/placeholder-images';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
 
 export default function Home() {
   const actions = [
@@ -51,6 +52,21 @@ export default function Home() {
       title: "A Guide to Your First Check-up",
       snippet: "What to expect and how to prepare for a routine medical visit.",
       image: placeholderImages.find(p => p.id === 'blog-3'),
+    },
+    {
+        title: "Mental Health Matters",
+        snippet: "Breaking the stigma and finding support for your mental well-being.",
+        image: placeholderImages.find(p => p.id === 'blog-4'),
+    },
+    {
+        title: "Healthy Eating 101",
+        snippet: "Simple dietary changes for a healthier, more energetic life.",
+        image: placeholderImages.find(p => p.id === 'blog-5'),
+    },
+    {
+        title: "Your Guide to Pediatric Care",
+        snippet: "Ensuring your child gets the best start with preventative care.",
+        image: placeholderImages.find(p => p.id === 'blog-6'),
     },
   ];
 
@@ -117,31 +133,44 @@ export default function Home() {
 
        <div id="blogs" className="space-y-6 scroll-mt-20">
         <h2 className="text-3xl font-bold text-foreground font-headline px-1">Recent Blogs</h2>
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {blogs.map(blog => blog.image && (
-            <Card key={blog.title} className="overflow-hidden flex flex-col transition-all hover:-translate-y-1">
-              <Image 
-                src={blog.image.imageUrl} 
-                alt={blog.image.description}
-                width={400}
-                height={250}
-                className="w-full h-48 object-cover"
-                data-ai-hint={blog.image.imageHint}
-              />
-              <div className="flex flex-col flex-1">
-                <CardHeader>
-                  <CardTitle>{blog.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1">
-                  <p className="text-muted-foreground">{blog.snippet}</p>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="link" className="px-0">Read More <span className="sr-only">about {blog.title}</span></Button>
-                </CardFooter>
-              </div>
-            </Card>
-          ))}
-        </div>
+         <Carousel
+          opts={{
+            align: "start",
+          }}
+          className="w-full"
+        >
+          <CarouselContent>
+            {blogs.map((blog, index) => blog.image && (
+              <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                 <div className="p-1 h-full">
+                    <Card key={blog.title} className="overflow-hidden flex flex-col transition-all hover:-translate-y-1 h-full">
+                    <Image 
+                        src={blog.image.imageUrl} 
+                        alt={blog.image.description}
+                        width={400}
+                        height={250}
+                        className="w-full h-48 object-cover"
+                        data-ai-hint={blog.image.imageHint}
+                    />
+                    <div className="flex flex-col flex-1">
+                        <CardHeader>
+                        <CardTitle>{blog.title}</CardTitle>
+                        </CardHeader>
+                        <CardContent className="flex-1">
+                        <p className="text-muted-foreground">{blog.snippet}</p>
+                        </CardContent>
+                        <CardFooter>
+                        <Button variant="link" className="px-0">Read More <span className="sr-only">about {blog.title}</span></Button>
+                        </CardFooter>
+                    </div>
+                    </Card>
+                 </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="hidden md:flex"/>
+          <CarouselNext className="hidden md:flex"/>
+        </Carousel>
       </div>
 
     </div>
